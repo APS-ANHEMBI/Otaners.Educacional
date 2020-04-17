@@ -13,16 +13,16 @@
         <h1>OtanersEducacional</h1>
     </header>
     <div>
-        <h2>Cadastro</h2>
         <form action="">
+            <fieldset>
+                <legend>Cadastro</legend>
             <label for="nomecompleto">Nome completo</label>
             <input type="text" id="nomecompleto" class="input-padrao" required placeholder="Thalles de Mileto">
             
             <label for="universidade">Universidade</label>
             <input type="text" id="nomecompleto" class="input-padrao" required placeholder="Anhembi Morumbi">
 
-            <fieldset>
-                <legend>Curso</legend>
+            <label for="curso">Curso</label>
                 <select>
                         <option>Análise e Desenvolvimento de Sistemas</option>
                         <option>Ciências da Computação</option>
@@ -32,22 +32,22 @@
                         <option>Sistemas de Informação</option>
                         <option>Sistemas para Internet</option>
                 </select>
+                
+                <label for="email">E-mail</label>
+                <input type="text" id="email" class="input-padrao" required placeholder="exemplo.email@exemplo.com.br">
+                
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" class="input-padrao" required placeholder="*************">
+                
+                <label for="confirmaSenha">Confirme a Senha</label>
+                <input type="password" id="confirmaSenha" class="input-padrao" required placeholder="*************">
+                
+                <label class="checkbox"><input type="checkbox" required checked> Gostaria de receber nossas novidades por e-mail?</label> 
+                <input type="submit" value="Enviar formulário" class="enviar">   
             </fieldset>
-
-            <label for="email">E-mail</label>
-            <input type="text" id="email" class="input-padrao" required placeholder="exemplo.email@exemplo.com.br">
-            
-            <label for="senha">Senha</label>
-            <input type="password" id="senha" class="input-padrao" required placeholder="*************">
-
-            <label for="confirmaSenha">Confirme a Senha</label>
-            <input type="password" id="confirmaSenha" class="input-padrao" required placeholder="*************">
-
-            <label class="checkbox"><input type="checkbox" required checked></label> 
-            <input type="submit" value="Enviar" class="enviar">   
-
-        </form>
-    </div>
+                
+            </form>
+        </div>
     <div></div>
     <div></div>
     <footer></footer>
