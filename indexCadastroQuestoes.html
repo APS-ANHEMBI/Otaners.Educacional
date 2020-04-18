@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reset.csss">
+    <title>OtanersEducacional</title>
+</head>
+
+<body>
+    <header>
+        <h1>OtanersEducacional</h1>
+    </header>
+    <div>
+        <form action="">
+            <fieldset>
+                <legend>Cadastro de questões</legend>
+                <label for="materia">Matéria</label>
+                <input type="text" id="materia" class="input-padrao" required placeholder="Lógica de programação">
+
+                <label for="pergunta">Questão</label>
+                <input type="text" id="pergunta" class="input-padrao" required
+                    placeholder="A palavra reservada 'String' é utilizada para...">
+
+                <label for="alterA">Alternativa A</label>
+                <input type="text" id="alterA" class="input-padrao" required placeholder="criar um laço de repetição">
+
+                <label for="alterB">Alternativa B</label>
+                <input type="text" id="alterB" class="input-padrao" required
+                    placeholder="declarar uma variável do tipo 'String'">
+
+                <label for="alterC">Alternativa C</label>
+                <input type="text" id="alterC" class="input-padrao" required placeholder="criar um input de dados">
+
+                <label for="alterD">Alternativa D</label>
+                <input type="text" id="alterD" class="input-padrao" required placeholder="declarar um Array">
+
+                <legend>Alternativa correta</legend>
+                <select class="list">
+                    <option>None</option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                    <option>D</option>
+                </select>
+
+                <legend>Nível de dificuldade</legend>
+                <select class="list">
+                    <option>None</option>
+                    <option>Fácil</option>
+                    <option>Médio</option>
+                    <option>Difícil</option>
+                </select>
+  
+             <input type="submit" value="Entrar" class="enviar">
+
+            </fieldset>
+
+        </form>
+    </div>
+</body>
+<script src="js/temporario.js"></script>
+
+</html>
