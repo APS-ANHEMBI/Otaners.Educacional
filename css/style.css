@@ -17,7 +17,15 @@ form label, form legend{
 
     width: 35%;
 }
-
+.list{
+    margin: 15px 0;
+    display: block;
+}
 .checkbox{
     margin: 20px 0;
+}
+
+.enviar{
+    margin:20px 0;
+    padding: 5px 10px;
 }
