@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>post</title>
+
+    <style>
+        input {
+            width: 15%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+
+    <div style="text-align: center;">
+
+        <h3>Pergunta:</h3>
+
+        <input id="pergunta" placeholder="pergunta" type="text"><br><br>
+        <input id="semestre" placeholder="semestre" type="text"><br><br>
+        <input id="materia" placeholder="materia" type="text"><br><br>
+        <input id="resposta_correta" placeholder="resposta_correta" type="text"><br><br>
+        <input id="resposta_incorreta1" placeholder="resposta_incorreta1" type="text"><br><br>
+        <input id="resposta_incorreta2" placeholder="resposta_incorreta2" type="text"><br><br>
+        <input id="resposta_incorreta3" placeholder="resposta_incorreta3" type="text"><br><br>
+        <input id="resposta_incorreta4" placeholder="resposta_incorreta4" type="text"><br><br>
+
+        <input type="button" value="Send data" onclick="post_Pergunta()">
+
+    </div>
+</body>
+
+</html>
