@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reset.csss">
+    <title>OtanersEducacional</title>
+</head>
+
+<body>
+    <header>
+        <h1>OtanersEducacional</h1>
+    </header>
+    <div>
+        <form action="">
+            <fieldset>
+                <legend>Questões cadastradas</legend>
+
+                <label for="filtrar-tabela">Filtrar por matéria:</label>
+				<input type="text" name="filtro" id="filtrar-tabela"
+				placeholder="Digite a matéria">
+
+				<label for="filtrar-tabela">Filtrar por dificuldade:</label>
+				<input type="text" name="filtro" id="filtrar-tabela"
+				placeholder="Digite a dificuldade">
+
+				<table>
+					<thead>
+						<tr>
+							<th>Materia</th>
+							<th>Questão</th>
+							<th>Alternativa Correta</th>
+							<th>Nível de dificuldade</th>
+						</tr>
+					</thead>
+					<tbody id="tabela-questoes">
+						<tr class="questoes" id="primeira-questao">
+							<td class="info-materia">Lógica de Programação</td>
+							<td class="info-questao">A palavra reservada 'String' é utilizada para...</td>
+							<td class="info-alterCorreta">B</td>
+							<td class="info-nivelDificuldade">Fácil</td>
+		
+						</tr>
+					</tbody>
+				</table>
+				<button id="buscar-pacientes" class="botao bto-principal">Buscar questão</button>
+            </fieldset>
+
+        </form>
+    </div>
+
+</body>
+<script src="js/temporario.js"></script>
+
+</html>

@@ -10,6 +10,37 @@ form label, form legend{
     margin: 0 0 10px;
 }
 
+table{
+	width: 100%;
+	margin-bottom : .5em;
+    table-layout: fixed;
+
+}
+
+td, th {
+	padding: .7em;
+	margin: 0;
+	border: 1px solid #ccc;
+	text-align: center;
+}
+
+th{
+	font-weight: bold;
+	background-color: #EEE;
+}
+
+label{
+	color: #555;
+	display: block;
+	margin-bottom: .2em;
+}
+
+#filtrar-tabela{
+	width: 325px;
+	height: 25px;
+	margin-bottom: 10px;
+}
+
 .input-padrao{
     display: block;
     margin: 0 0 10px;
