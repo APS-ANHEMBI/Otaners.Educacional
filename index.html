@@ -23,7 +23,7 @@
     <!-- IMPORTS BOOTSTRAP E JQUERY -->
 
     <title>OtanersEducacional</title>
-    
+
 </head>
 
 <body>
@@ -33,22 +33,20 @@
 
             <div class="col-md-4 col-sm-2"></div>
             <div class="col-md-4 col-sm-8">
-                
-                    <form id="LoginForm">
-                        <legend class="text-center">OtanersEducacional</legend>
+                <form id="LoginForm">
+                    <legend class="text-center">OtanersEducacional</legend>
 
-                        <label for="email">E-mail</label>
-                        <input name="email" type="email" id="email" class="input-padrao" required
-                            placeholder="exemplo.email@exemplo.com.br">
+                    <label for="email">E-mail</label>
+                    <input name="email" type="email" id="email" class="input-padrao" required
+                        placeholder="exemplo.email@exemplo.com.br">
 
-                        <label for="senha">Senha</label>
-                        <input name="senha" type="password" id="senha" class="input-padrao" required
-                            placeholder="*************">
+                    <label for="senha">Senha</label>
+                    <input name="senha" type="password" id="senha" class="input-padrao" required
+                        placeholder="*************">
 
-                        <input type="submit" value="Entrar" class="enviar">
-                        <a class="criar-conta" href="indexCadastro.html">Não possui cadastro?</a>
-                    </form>
-                
+                    <input type="submit" value="Entrar" class="enviar">
+                    <a class="criar-conta" href="indexCadastro.html">Não possui cadastro?</a>
+                </form>
             </div>
             <div class="col-md-4 col-sm-2"></div>
 
@@ -78,7 +76,7 @@
             }),
             success: function (msg) {
                 alert(msg);
-                if(msg == 'Bem Vindo !'){
+                if (msg == 'Bem Vindo !') {
                     location.replace('indexQuestoes.html');
                 }
             }, error: function (msg) {

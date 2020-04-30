@@ -64,6 +64,9 @@ label{
     float: right;
     margin:30px 0;
 }
+.entrar-conta{
+    margin-left: 2%;
+}
 .login-content{
     align-content: center;
 }
