@@ -40,6 +40,9 @@ label{
 	height: 25px;
 	margin-bottom: 10px;
 }
+.invisivel{
+	display: none;
+}
 
 .input-padrao{
     display: block;
