@@ -2,29 +2,27 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/reset.csss">
-    <title>OtanersEducacional</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/reset.csss">
+	<title>OtanersEducacional</title>
 </head>
 
 <body>
-    <header>
-        <h1>OtanersEducacional</h1>
-    </header>
-    <div>
-        <form action="">
-            <fieldset>
-                <legend>Questões cadastradas</legend>
+	<header>
+		<h1>OtanersEducacional</h1>
+	</header>
+	<div>
+		<form action="">
+			<fieldset>
+				<legend>Questões cadastradas</legend>
 
-                <label for="filtrar-tabela">Filtrar por matéria:</label>
-				<input type="text" name="filtro" id="filtrar-tabela"
-				placeholder="Digite a matéria">
+				<label for="filtrar-tabela-materia">Filtrar por matéria:</label>
+				<input type="text" name="filtro" id="filtrar-tabela-materia" placeholder="Digite a matéria">
 
 				<label for="filtrar-tabela">Filtrar por dificuldade:</label>
-				<input type="text" name="filtro" id="filtrar-tabela"
-				placeholder="Digite a dificuldade">
+				<input type="text" name="filtro" id="filtrar-dificuldade" placeholder="Digite a dificuldade">
 
 				<table>
 					<thead>
@@ -36,22 +34,42 @@
 						</tr>
 					</thead>
 					<tbody id="tabela-questoes">
-						<tr class="questoes" id="primeira-questao">
+						<tr class="questao" id="primeira-questao">
 							<td class="info-materia">Lógica de Programação</td>
-							<td class="info-questao">A palavra reservada 'String' é utilizada para...</td>
+							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
 							<td class="info-alterCorreta">B</td>
 							<td class="info-nivelDificuldade">Fácil</td>
-		
 						</tr>
+
+						<tr class="questao" >
+							<td class="info-materia">Engenharia de Software</td>
+							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
+							<td class="info-alterCorreta">D</td>
+							<td class="info-nivelDificuldade">Média</td>
+						</tr>
+						<tr class="questao" >
+							<td class="info-materia">Interface Humano e Computador</td>
+							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
+							<td class="info-alterCorreta">A</td>
+							<td class="info-nivelDificuldade">Fácil</td>
+						</tr>
+						<tr class="questao" >
+							<td class="info-materia">Redes</td>
+							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
+							<td class="info-alterCorreta">E</td>
+							<td class="info-nivelDificuldade">Difícil</td>
+						</tr>
+
+
 					</tbody>
 				</table>
-				<button id="buscar-pacientes" class="botao bto-principal">Buscar questão</button>
-            </fieldset>
+				<button id="buscar-questoes" class="botao bto-principal">Buscar questão</button>
+			</fieldset>
 
-        </form>
-    </div>
+		</form>
+	</div>
 
 </body>
-<script src="js/temporario.js"></script>
+<script src="js/filtra.js"></script>
 
 </html>
