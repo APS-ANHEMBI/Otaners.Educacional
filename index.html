@@ -22,7 +22,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- IMPORTS BOOTSTRAP E JQUERY -->
 
-    <title>OtanersEducacional</title>
+    <title>Otaner's Educacional Management</title>
 
 </head>
 
@@ -34,7 +34,7 @@
             <div class="col-md-4 col-sm-2"></div>
             <div class="col-md-4 col-sm-8">
                 <form id="LoginForm">
-                    <legend class="text-center">OtanersEducacional</legend>
+                    <legend class="text-center">Otaner's Educacional Management</legend>
 
                     <label for="email">E-mail</label>
                     <input name="email" type="email" id="email" class="input-padrao" required
@@ -46,6 +46,10 @@
 
                     <input type="submit" value="Entrar" class="enviar">
                     <a class="criar-conta" href="indexCadastro.html">Não possui cadastro?</a>
+                    <br>
+                    <div style="width: 100%; text-align: center;">
+                        <h6 id="txtInfo" style="color: red;"></h6>
+                    </div>
                 </form>
             </div>
             <div class="col-md-4 col-sm-2"></div>
@@ -77,9 +81,13 @@
             success: function (msg) {
                 if (msg == 'Bem Vindo !') {
                     location.replace('indexQuestoes.html');
+                } else {
+                    document.getElementById('txtInfo').innerHTML = 'Credenciais inválidas!';
+                    document.getElementById("senha").value = '';
+                    document.getElementById("email").value = '';
                 }
-            }, error: function (error) {
-
+            }, error: function (msg) {
+                document.getElementById('txtInfo').innerHTML = 'Ocorreu um erro, por favor tente novamente ...';
             },
             contentType: "application/json"
         });
