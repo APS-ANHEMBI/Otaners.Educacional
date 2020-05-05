@@ -75,12 +75,11 @@
                 "senha": document.getElementById("senha").value
             }),
             success: function (msg) {
-                alert(msg);
                 if (msg == 'Bem Vindo !') {
                     location.replace('indexQuestoes.html');
                 }
-            }, error: function (msg) {
-                alert(msg);
+            }, error: function (error) {
+
             },
             contentType: "application/json"
         });
