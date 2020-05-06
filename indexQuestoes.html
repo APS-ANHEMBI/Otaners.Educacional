@@ -7,6 +7,20 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/reset.csss">
 
+	<!-- IMPORTS BOOTSTRAP E JQUERY -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- IMPORTS BOOTSTRAP E JQUERY -->
 
 
 
@@ -14,175 +28,178 @@
 </head>
 
 <body>
-	<header>
-		<h1>Otaner's Educacional Management</h1>
-	</header>
-	<div>
-		<form id="form-adiciona">
-			<fieldset>
-				<legend>Questões cadastradas</legend>
 
-				<label for="filtrar-tabela-materia">Filtrar por matéria:</label>
-				<input type="text" name="filtro" id="filtrar-tabela-materia" placeholder="Digite a matéria">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" style="margin-left: 5%;" href="indexQuestoes.html">Otaner's Educacional Management</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-				<label for="filtrar-tabela-dificuldade">Filtrar por dificuldade:</label>
-				<input type="text" name="filtro" id="filtrar-tabela-dificuldade" placeholder="Digite a dificuldade">
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
 
-				<table>
-					<thead>
-						<tr>
-							<th>Materia</th>
-							<th>Questão</th>
-							<th>Alternativa Correta</th>
-							<th>Nível de dificuldade</th>
-						</tr>
-					</thead>
-					<tbody id="tabela-questoes">
-						<tr class="questao" id="primeira-questao">
-							<td class="info-materia">Lógica de Programação</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">B</td>
-							<td class="info-nivelDificuldade">Fácil</td>
-						</tr>
+				<li class="nav-item dropdown" style="margin-left: 8%;">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Questões
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="indexQuestoes.html">Listar Questões</a>
+						<a class="dropdown-item" href="indexCadastroQuestoes.html">Criar nova Questão</a>
+						<a class="dropdown-item" href="#">Criar nova Matéria</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Mais opções</a>
+					</div>
+				</li>
 
-						<tr class="questao" >
-							<td class="info-materia">Engenharia de Software</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">D</td>
-							<td class="info-nivelDificuldade">Média</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Teoria de Sistemas da Informação</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">A</td>
-							<td class="info-nivelDificuldade">Fácil</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Redes</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">E</td>
-							<td class="info-nivelDificuldade">Difícil</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Desenvolvimento de Software para Web</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">E</td>
-							<td class="info-nivelDificuldade">Médio</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Teoria de Sistemas da Informação</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">C</td>
-							<td class="info-nivelDificuldade">Médio</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Sistemas Operacionais</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">B</td>
-							<td class="info-nivelDificuldade">Médio</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Teoria de Sistemas da Informação</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">E</td>
-							<td class="info-nivelDificuldade">Difícil</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Banco de Dados</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">E</td>
-							<td class="info-nivelDificuldade">Fácil</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Sistemas Operacionais</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">E</td>
-							<td class="info-nivelDificuldade">Fácil</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Banco de Dados</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">A</td>
-							<td class="info-nivelDificuldade">Médio</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Interface Humano e Computador</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">A</td>
-							<td class="info-nivelDificuldade">Fácil</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Lógica de Programação</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">B</td>
-							<td class="info-nivelDificuldade">Médio</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Estrutura de Dados</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">E</td>
-							<td class="info-nivelDificuldade">Médio</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Desenvolvimento de Software para Web</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">D</td>
-							<td class="info-nivelDificuldade">Médio</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Interface Humano e Computador</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">B</td>
-							<td class="info-nivelDificuldade">Difícil</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Estrutura de Dados</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">A</td>
-							<td class="info-nivelDificuldade">Difícil</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Redes</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">C</td>
-							<td class="info-nivelDificuldade">Médio</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Banco de Dados</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">E</td>
-							<td class="info-nivelDificuldade">Difícil</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Estrutura de Dados</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">E</td>
-							<td class="info-nivelDificuldade">Médio</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Matemática</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">C</td>
-							<td class="info-nivelDificuldade">Médio</td>
-						</tr>
-						<tr class="questao" >
-							<td class="info-materia">Engenharia de Software</td>
-							<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio vitae corporis a nisi </td>
-							<td class="info-alterCorreta">D</td>
-							<td class="info-nivelDificuldade">Difícil</td>
-						</tr>
+				<li class="nav-item dropdown" style="margin-left: 8%;">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Professores
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="#">Recomendar Professor</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Mais opções</a>
+					</div>
+				</li>
+
+			</ul>
 
 
-					</tbody>
-				</table>
-				<button class="enviar" onclick="location.href='indexCadastroQuestoes.html'" type="button">Cadastrar questões</button>
-				
-			</fieldset>
+			<form class="form-inline my-2 my-lg-0" style="margin-right: 10%;">
+				<!-- <button class="btn btn-outline-primary my-2 my-sm-0" style="width: 100%;"
+					onclick="location.replace('index.html');" type="button">Sair</button> -->
 
-		</form>
+					<ul class="navbar-nav mr-auto">
+
+						<li class="nav-item dropdown" style="margin-left: 10%;">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								{ Nome do Professor }
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="indexQuestoes.html">Perfil</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" onclick="location.replace('index.html');">Sair</a>
+							</div>
+						</li>
+		
+					</ul>
+
+			</form>
+		</div>
+	</nav>
+
+	<div class="container">
+
+		<div>
+			<form id="form-adiciona">
+				<fieldset>
+					<legend style="text-align: center; font-size: x-large;">Questões cadastradas</legend>
+
+					<br><br>
+
+					<div class="row">
+
+						<div class="col-2"></div>
+
+						<div class="col-4" style="text-align: center;">
+							<label for="filtrar-tabela-materia">Filtrar por matéria:</label>
+							<input class="form-control mr-sm-2" style="width: 100%;" type="search" name="filtro"
+								id="filtrar-tabela-materia" placeholder="Digite a matéria">
+						</div>
+
+						<div class="col-4" style="text-align: center;">
+							<label for="filtrar-tabela-dificuldade">Filtrar por dificuldade:</label>
+							<input class="form-control mr-sm-2" style="width: 100%;" type="search" name="filtro"
+								id="filtrar-tabela-dificuldade" placeholder="Digite a dificuldade">
+						</div>
+
+						<div class="col-2"></div>
+
+
+					</div>
+
+					<table>
+						<thead>
+							<tr style="text-align: center;">
+								<th>Materia</th>
+								<th>Questão</th>
+								<th>Alternativa Correta</th>
+								<th>Nível de dificuldade</th>
+							</tr>
+						</thead>
+						<tbody id="tabela-questoes">
+
+							<!-- <tr class="questao" id="primeira-questao">
+								<td class="info-materia">Lógica de Programação</td>
+								<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio
+									vitae corporis a nisi </td>
+								<td class="info-alterCorreta">B</td>
+								<td class="info-nivelDificuldade">Fácil</td>
+							</tr>
+
+							<tr class="questao">
+								<td class="info-materia">Engenharia de Software</td>
+								<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio
+									vitae corporis a nisi </td>
+								<td class="info-alterCorreta">D</td>
+								<td class="info-nivelDificuldade">Média</td>
+							</tr> -->
+
+
+						</tbody>
+					</table>
+
+				</fieldset>
+
+			</form>
+
+		</div>
+
 	</div>
 
 </body>
+
 <script src="js/filtra.js"></script>
+
+<script type="text/javascript">
+
+	BuscarQuestoes();
+
+	function BuscarQuestoes() {
+
+		$.ajax({
+			url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Perguntas',
+			data: null,
+			dataType: 'json',
+			success: function (msg) {
+
+				var response = JSON.stringify(msg);
+				response = $.parseJSON(response);
+				console.log();
+
+				$(function () {
+					$.each(response, function (i, item) {
+						var $tr = $('<tr class="questao">').append(
+								$('<td class="info-materia">').text(item.materia),
+								$('<td class="info-questao">').text(item.pergunta),
+								$('<td class="info-alterCorreta">').text(item.resposta_correta),
+								$('<td class="info-nivelDificuldade">').text(item.semestre)
+							).appendTo('#tabela-questoes');
+
+					});
+				});
+
+
+
+			}
+		});
+
+	}
+
+</script>
 
 </html>

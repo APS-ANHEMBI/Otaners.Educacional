@@ -70,8 +70,8 @@ a{
     width: 20%;
 }
 .criar-conta{
-    float: right;
-    margin:30px 0;
+    float: right; 
+    margin-top: 2%
 }
 .entrar-conta{
     margin-left: 2%;

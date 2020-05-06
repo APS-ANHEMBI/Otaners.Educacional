@@ -33,17 +33,17 @@
 
             <div class="col-md-2 col-sm-1"></div>
             <div class="col-md-8 col-sm-10">
-                <form id="CadastroForm">
+                <form id="CadastroForm" class="form">
                     <fieldset>
                         <legend class="text-center">Otaner's Educacional Management</legend>
                         <label for="nome">Nome completo</label>
-                        <input name="nome" id="nome" type="text" class="input-padrao" required>
+                        <input name="nome" id="nome" type="text" class="input-padrao form-control" required>
 
                         <label for="instituicao">Instituição de Ensino</label>
-                        <input id="instituicao" name="instituicao" type="text" class="input-padrao" required>
+                        <input id="instituicao" name="instituicao" type="text" class="input-padrao form-control" required>
 
                         <label for="curso">Curso</label>
-                        <select id="curso" name="curso" class="list">
+                        <select id="curso" name="curso" class="list form-control">
                             <option>Análise e Desenvolvimento de Sistemas</option>
                             <option>Ciências da Computação</option>
                             <option>Engenharia da Computação</option>
@@ -54,21 +54,21 @@
                         </select>
 
                         <label for="email">E-mail</label>
-                        <input id="email" name="email" type="email" class="input-padrao" required
+                        <input id="email" name="email" type="email" class="input-padrao form-control" required
                             placeholder="exemplo.email@exemplo.com.br">
 
                         <label for="senha">Senha</label>
-                        <input id="senha" name="senha" type="password" class="input-padrao" required
+                        <input id="senha" name="senha" type="password" minlength="5" class="input-padrao form-control" required
                             placeholder="*************">
 
                         <label for="confirmaSenha">Confirme a Senha</label>
-                        <input id="confirmaSenha" name="confirmaSenha" type="password" class="input-padrao" required
+                        <input id="confirmaSenha" name="confirmaSenha" type="password" minlength="5" class="input-padrao form-control" required
                             placeholder="*************">
 
-                        <label class="checkbox"><input type="checkbox" required checked> Gostaria de receber nossas
+                        <label class="checkbox form-control"><input type="checkbox" required checked> Gostaria de receber nossas
                             novidades
                             por e-mail?</label>
-                        <input type="submit" value="Cadastrar" class="enviar">
+                        <input type="submit" value="Cadastrar" class="enviar form-control">
                         <a class="entrar-conta" href="index.html">Já possui cadastro?</a>
                     </fieldset>
 

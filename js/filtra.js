@@ -51,9 +51,9 @@ campoFiltro.addEventListener("input", function(){
 });
 
 
-var irParaCadastroDeQuestoes = document.querySelector("#cadastrar-questoes");
+/*var irParaCadastroDeQuestoes = document.querySelector("#cadastrar-questoes");
 
 irParaCadastroDeQuestoes.addEventListener("click", function(){
     var questoes = document.querySelectorAll(".irCadastro");
     location.replace('index.html');
-});
+});*/

@@ -36,18 +36,21 @@
                 <form id="LoginForm">
                     <legend class="text-center">Otaner's Educacional Management</legend>
 
+                    <br>
+
                     <label for="email">E-mail</label>
                     <input name="email" type="email" id="email" class="input-padrao" required
                         placeholder="exemplo.email@exemplo.com.br">
 
                     <label for="senha">Senha</label>
-                    <input name="senha" type="password" id="senha" class="input-padrao" required
+                    <input name="senha" type="password" id="senha" minlength="5" class="input-padrao" required
                         placeholder="*************">
 
-                    <input type="submit" value="Entrar" class="enviar">
-                    <a class="criar-conta" href="indexCadastro.html">Não possui cadastro?</a>
+                    <input class="btn btn-outline-primary my-2 my-sm-0 enviar" type="submit" value="Entrar">
+
+                    <a class="text-primary criar-conta" href="indexCadastro.html">Não possui cadastro?</a>
                     <br>
-                    <div style="width: 100%; text-align: center;">
+                    <div style="width: 100%; margin-top: 3%;">
                         <h6 id="txtInfo" style="color: red;"></h6>
                     </div>
                 </form>
@@ -80,11 +83,12 @@
             }),
             success: function (msg) {
                 if (msg == 'Bem Vindo !') {
-                    location.replace('indexQuestoes.html');
+                    window.location.href = ('indexQuestoes.html');
                 } else {
                     document.getElementById('txtInfo').innerHTML = 'Credenciais inválidas!';
                     document.getElementById("senha").value = '';
                     document.getElementById("email").value = '';
+                    document.getElementById("email").focus();
                 }
             }, error: function (msg) {
                 document.getElementById('txtInfo').innerHTML = 'Ocorreu um erro, por favor tente novamente ...';
