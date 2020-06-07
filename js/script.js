@@ -146,7 +146,9 @@ function Buscar_Questoes() {
                         $('<td class="info-materia">').text(item.materia),
                         $('<td class="info-questao">').text(item.pergunta),
                         $('<td class="info-alterCorreta">').text(item.resposta_correta),
-                        $('<td class="info-nivelDificuldade">').text(item.semestre)
+                        $('<td class="info-nivelDificuldade">').text(item.semestre),
+                        $('<td>').append('<input type="button" value="Editar" class="btn btn-outline-primary form-control">'),
+                        $('<td>').append('<input type="button" value="Deletar" class="btn btn-outline-danger form-control">')
                     ).appendTo('#tabela-questoes');
 
                 });

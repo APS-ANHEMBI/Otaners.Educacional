@@ -73,3 +73,7 @@ label{
 .login-content{
     align-content: center;
 }
+
+td {
+    cursor: pointer;
+}
