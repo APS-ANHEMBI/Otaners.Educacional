@@ -4,8 +4,6 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/reset.csss">
 
 	<!-- IMPORTS BOOTSTRAP E JQUERY -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -22,15 +20,19 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<!-- IMPORTS BOOTSTRAP E JQUERY -->
 
+	<script type="text/javascript" src="js/script.js"></script>
+	<link rel="stylesheet" href="css/style.css">
 
+	<link rel="stylesheet" href="css/style.css">
+	<!-- <link rel="stylesheet" href="css/reset.css"> -->
 
 	<title>Otaner's Educacional Management</title>
 </head>
 
-<body>
+<body onload="Buscar_Questoes();">
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" style="margin-left: 5%;" href="indexQuestoes.html">Otaner's Educacional Management</a>
+		<a class="navbar-brand" style="margin-left: 5%;" href="Principal.html">Otaner's Educacional Management</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -45,8 +47,8 @@
 						Questões
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="indexQuestoes.html">Listar Questões</a>
-						<a class="dropdown-item" href="indexCadastroQuestoes.html">Criar nova Questão</a>
+						<a class="dropdown-item" href="Principal.html">Listar Questões</a>
+						<a class="dropdown-item" href="CadastroQuestão.html">Criar nova Questão</a>
 						<a class="dropdown-item" href="#">Criar nova Matéria</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="#">Mais opções</a>
@@ -72,21 +74,22 @@
 				<!-- <button class="btn btn-outline-primary my-2 my-sm-0" style="width: 100%;"
 					onclick="location.replace('index.html');" type="button">Sair</button> -->
 
-					<ul class="navbar-nav mr-auto">
+				<ul class="navbar-nav mr-auto">
 
-						<li class="nav-item dropdown" style="margin-left: 10%;">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								{ Nome do Professor }
-							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="indexQuestoes.html">Perfil</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" onclick="location.replace('index.html');">Sair</a>
-							</div>
-						</li>
-		
-					</ul>
+					<li class="nav-item dropdown" style="margin-left: 10%;">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							{ Nome do Professor }
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Perfil</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" style="cursor: pointer;"
+								onclick="location.replace('index.html');">Sair</a>
+						</div>
+					</li>
+
+				</ul>
 
 			</form>
 		</div>
@@ -162,44 +165,5 @@
 	</div>
 
 </body>
-
-<script src="js/filtra.js"></script>
-
-<script type="text/javascript">
-
-	BuscarQuestoes();
-
-	function BuscarQuestoes() {
-
-		$.ajax({
-			url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Perguntas',
-			data: null,
-			dataType: 'json',
-			success: function (msg) {
-
-				var response = JSON.stringify(msg);
-				response = $.parseJSON(response);
-				console.log();
-
-				$(function () {
-					$.each(response, function (i, item) {
-						var $tr = $('<tr class="questao">').append(
-								$('<td class="info-materia">').text(item.materia),
-								$('<td class="info-questao">').text(item.pergunta),
-								$('<td class="info-alterCorreta">').text(item.resposta_correta),
-								$('<td class="info-nivelDificuldade">').text(item.semestre)
-							).appendTo('#tabela-questoes');
-
-					});
-				});
-
-
-
-			}
-		});
-
-	}
-
-</script>
 
 </html>

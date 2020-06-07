@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- <link rel="stylesheet" href="css/reset.csss"> -->
 
     <!-- IMPORTS BOOTSTRAP E JQUERY -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -21,6 +19,9 @@
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- IMPORTS BOOTSTRAP E JQUERY -->
+
+    <script type="text/javascript" src="js/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 
     <title>Otaner's Educacional Management</title>
 
@@ -48,7 +49,7 @@
 
                     <input class="btn btn-outline-primary my-2 my-sm-0 enviar" type="submit" value="Entrar">
 
-                    <a class="text-primary criar-conta" href="indexCadastro.html">Não possui cadastro?</a>
+                    <a class="text-primary criar-conta" href="CadastroProfessor.html">Não possui cadastro?</a>
                     <br>
                     <div style="width: 100%; margin-top: 3%;">
                         <h6 id="txtInfo" style="color: red;"></h6>
@@ -61,43 +62,5 @@
     </div>
 
 </body>
-<!-- <script src="js/temporario.js"></script> -->
-
-<script type="text/javascript">
-
-    // Impede o FORM de dar submit, e obriga ele executar o Metodo "Login"
-    $('#LoginForm').submit(function () {
-        Login();
-        return false;
-    });
-
-    // Função de Login
-    function Login() {
-        $.ajax({
-            type: 'POST',
-            url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/loginProfessor',
-            dataType: 'json',
-            data: JSON.stringify({
-                "email": document.getElementById("email").value,
-                "senha": document.getElementById("senha").value
-            }),
-            success: function (msg) {
-                if (msg == 'Bem Vindo !') {
-                    window.location.href = ('indexQuestoes.html');
-                } else {
-                    document.getElementById('txtInfo').innerHTML = 'Credenciais inválidas!';
-                    document.getElementById("senha").value = '';
-                    document.getElementById("email").value = '';
-                    document.getElementById("email").focus();
-                }
-            }, error: function (msg) {
-                document.getElementById('txtInfo').innerHTML = 'Ocorreu um erro, por favor tente novamente ...';
-            },
-            contentType: "application/json"
-        });
-
-    }
-
-</script>
 
 </html>

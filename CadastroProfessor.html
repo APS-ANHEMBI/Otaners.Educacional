@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- <link rel="stylesheet" href="css/reset.csss"> -->
 
     <!-- IMPORTS BOOTSTRAP E JQUERY -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -21,6 +19,10 @@
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- IMPORTS BOOTSTRAP E JQUERY -->
+
+
+    <script type="text/javascript" src="js/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 
     <title>Otaner's Educacional Management</title>
 
@@ -40,7 +42,8 @@
                         <input name="nome" id="nome" type="text" class="input-padrao form-control" required>
 
                         <label for="instituicao">Instituição de Ensino</label>
-                        <input id="instituicao" name="instituicao" type="text" class="input-padrao form-control" required>
+                        <input id="instituicao" name="instituicao" type="text" class="input-padrao form-control"
+                            required>
 
                         <label for="curso">Curso</label>
                         <select id="curso" name="curso" class="list form-control">
@@ -58,14 +61,15 @@
                             placeholder="exemplo.email@exemplo.com.br">
 
                         <label for="senha">Senha</label>
-                        <input id="senha" name="senha" type="password" minlength="5" class="input-padrao form-control" required
-                            placeholder="*************">
+                        <input id="senha" name="senha" type="password" minlength="5" class="input-padrao form-control"
+                            required placeholder="*************">
 
                         <label for="confirmaSenha">Confirme a Senha</label>
-                        <input id="confirmaSenha" name="confirmaSenha" type="password" minlength="5" class="input-padrao form-control" required
-                            placeholder="*************">
+                        <input id="confirmaSenha" name="confirmaSenha" type="password" minlength="5"
+                            class="input-padrao form-control" required placeholder="*************">
 
-                        <label class="checkbox form-control"><input type="checkbox" required checked> Gostaria de receber nossas
+                        <label class="checkbox form-control"><input type="checkbox" required checked> Gostaria de
+                            receber nossas
                             novidades
                             por e-mail?</label>
                         <input type="submit" value="Cadastrar" class="enviar form-control">
@@ -79,45 +83,5 @@
         </div>
     </div>
 </body>
-<!-- <script src="js/temporario.js"></script> -->
-
-<script type="text/javascript">
-
-    // Impede o FORM de dar submit, e obriga ele executar o Metodo "Login"
-    $('#CadastroForm').submit(function () {
-        Cadastrar();
-        return false;
-    });
-
-    // Função de Login
-    function Cadastrar() {
-        $.ajax({
-            type: 'POST',
-            url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/cadastrarProfessor',
-            dataType: 'json',
-            data: JSON.stringify({
-                "email": document.getElementById("email").value,
-                "senha": document.getElementById("senha").value,
-                "nome": document.getElementById("nome").value,
-                "curso": document.getElementById("curso").value,
-                "instituicao": document.getElementById("instituicao").value
-            }),
-            success: function (msg) {
-                document.getElementById("email").text = "";
-                document.getElementById("senha").text = "";
-                document.getElementById("nome").text = "";
-                document.getElementById("curso").text = "";
-                document.getElementById("instituicao").text = "";
-                alert(msg);                
-                location.replace('index.html');
-            }, error: function (msg) {
-                alert(msg);
-            },
-            contentType: "application/json"
-        });
-
-    }
-
-</script>
 
 </html>
