@@ -30,58 +30,126 @@
 
 <body>
 
-    <div class="container">
-        <div class="row">
+    <form id="CadastroForm">
 
-            <div class="col-md-2 col-sm-1"></div>
-            <div class="col-md-8 col-sm-10">
-                <form id="CadastroForm" class="form">
-                    <fieldset>
-                        <legend class="text-center">Otaner's Educacional Management</legend>
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-3 col-sm-3"></div>
+                <div class="col-md-6 col-sm-6">
+
+                    <div style="text-align: center;">
                         <label for="nome">Nome completo</label>
-                        <input name="nome" id="nome" type="text" class="input-padrao form-control" required>
+                    </div>
 
-                        <label for="instituicao">Instituição de Ensino</label>
-                        <input id="instituicao" name="instituicao" type="text" class="input-padrao form-control"
-                            required>
+                    <input name="nome" id="nome" type="text" class="input-padrao form-control"
+                        placeholder="Marielle Francisco da Silva" required style="text-align: center;">
 
-                        <label for="curso">Curso</label>
-                        <select id="curso" name="curso" class="list form-control">
-                            <option>Análise e Desenvolvimento de Sistemas</option>
-                            <option>Ciências da Computação</option>
-                            <option>Engenharia da Computação</option>
-                            <option>Engenharia de Software</option>
-                            <option>Jogos Digitais</option>
-                            <option>Sistemas de Informação</option>
-                            <option>Sistemas para Internet</option>
-                        </select>
-
-                        <label for="email">E-mail</label>
-                        <input id="email" name="email" type="email" class="input-padrao form-control" required
-                            placeholder="exemplo.email@exemplo.com.br">
-
-                        <label for="senha">Senha</label>
-                        <input id="senha" name="senha" type="password" minlength="5" class="input-padrao form-control"
-                            required placeholder="*************">
-
-                        <label for="confirmaSenha">Confirme a Senha</label>
-                        <input id="confirmaSenha" name="confirmaSenha" type="password" minlength="5"
-                            class="input-padrao form-control" required placeholder="*************">
-
-                        <label class="checkbox form-control"><input type="checkbox" required checked> Gostaria de
-                            receber nossas
-                            novidades
-                            por e-mail?</label>
-                        <input type="submit" value="Cadastrar" class="enviar form-control">
-                        <a class="entrar-conta" href="index.html">Já possui cadastro?</a>
-                    </fieldset>
-
-                </form>
+                </div>
+                <div class="col-md-3 col-sm-3"></div>
             </div>
-            <div class="col-md-2 col-sm-1"></div>
+
+            <div class="row">
+                <div class="col-md-3 col-sm-3"></div>
+                <div class="col-md-6 col-sm-6">
+
+                    <div style="text-align: center;">
+                        <label for="email">E-mail</label>
+                    </div>
+
+                    <input id="email" name="email" type="email" class="input-padrao form-control" required
+                        placeholder="email@exemplo.com" style="text-align: center;">
+
+                </div>
+                <div class="col-md-3 col-sm-3"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 col-sm-3"></div>
+                <div class="col-md-6 col-sm-6">
+
+                    <div style="text-align: center;">
+                        <label for="senha">Senha</label>
+                    </div>
+
+                    <input id="senha" name="senha" type="password" minlength="5" class="input-padrao form-control"
+                        required placeholder="*****" style="text-align: center;">
+
+                </div>
+                <div class="col-md-3 col-sm-3"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 col-sm-3"></div>
+                <div class="col-md-6 col-sm-6">
+
+                    <div style="text-align: center;">
+                        <label for="senha">Data de Nascimento</label>
+                    </div>
+
+                    <input id="dataNascimento" name="dataNascimento" type="date" class="input-padrao form-control"
+                        required min="1950-01-01" max="1999-12-31">
+
+                </div>
+                <div class="col-md-3 col-sm-3"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 col-sm-3"></div>
+                <div class="col-md-6 col-sm-6">
+
+                    <div style="text-align: center;">
+                        <label for="instituicao">Instituição de Ensino</label>
+                    </div>
+
+                    <input id="instituicao" name="instituicao" type="text" class="input-padrao form-control"
+                        placeholder="UAM - Universidade Anhembi Morumbi" required>
+
+                </div>
+                <div class="col-md-3 col-sm-3"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 col-sm-3"></div>
+                <div class="col-md-6 col-sm-6">
+
+                    <div style="text-align: center;">
+                        <label for="curso">Curso</label>
+                    </div>
+
+                    <select id="curso" name="curso" class="list form-control" style="cursor: pointer;">
+                        <option>Análise e Desenvolvimento de Sistemas</option>
+                        <option>Ciências da Computação</option>
+                        <option>Engenharia da Computação</option>
+                        <option>Engenharia de Software</option>
+                        <option>Jogos Digitais</option>
+                        <option>Sistemas de Informação</option>
+                        <option>Sistemas para Internet</option>
+                    </select>
+
+                </div>
+                <div class="col-md-3 col-sm-3"></div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-md-3 col-sm-3"></div>
+                <div class="col-md-6 col-sm-6">
+
+                    <div style="text-align: center;">
+                        <input type="submit" value="Cadastrar" class="btn btn-outline-primary form-control">
+                        <a class="entrar-conta" href="index.html">Já possui cadastro?</a>
+                    </div>
+
+                </div>
+                <div class="col-md-3 col-sm-3"></div>
+            </div>
 
         </div>
-    </div>
+
+    </form>
+
 </body>
 
 </html>

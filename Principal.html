@@ -31,6 +31,7 @@
 
 <body onload="Buscar_Questoes();">
 
+	<!--NAVBAR-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand" style="margin-left: 5%;" href="Principal.html">Otaner's Educacional Management</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -48,8 +49,8 @@
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="Principal.html">Listar Questões</a>
-						<a class="dropdown-item" href="CadastroQuestão.html">Criar nova Questão</a>
-						<a class="dropdown-item" href="#">Criar nova Matéria</a>
+						<a class="dropdown-item" href="CadastroQuestão.html">Cadastrar Questão</a>
+						<a class="dropdown-item" href="CadastroMateria.html">Cadastrar Matéria</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="#">Mais opções</a>
 					</div>
@@ -61,7 +62,10 @@
 						Professores
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">Recomendar Professor</a>
+						<a class="dropdown-item" href="RecomendarProfessores.html">Recomendação de Professores</a>
+						<a class="dropdown-item" href="ResetarSenhas.html">Resets de senhas de Professores</a>
+						<a class="dropdown-item" href="CadastroCurso.html">Cadastrar Curso</a>
+						<a class="dropdown-item" href="CadastroInstituicao.html">Cadastrar Instituição</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="#">Mais opções</a>
 					</div>
@@ -94,49 +98,46 @@
 			</form>
 		</div>
 	</nav>
+	<legend style="text-align: center; font-size: x-large;">Questões cadastradas</legend>
+	<!--NAVBAR-->
 
 	<div class="container">
 
 		<div>
 			<form id="form-adiciona">
-				<fieldset>
-					<legend style="text-align: center; font-size: x-large;">Questões cadastradas</legend>
 
-					<br><br>
+				<div class="row">
 
-					<div class="row">
+					<div class="col-md-2"></div>
 
-						<div class="col-2"></div>
-
-						<div class="col-4" style="text-align: center;">
-							<label for="filtrar-tabela-materia">Filtrar por matéria:</label>
-							<input class="form-control mr-sm-2" style="width: 100%;" type="search" name="filtro"
-								id="filtrar-tabela-materia" placeholder="Digite a matéria">
-						</div>
-
-						<div class="col-4" style="text-align: center;">
-							<label for="filtrar-tabela-dificuldade">Filtrar por dificuldade:</label>
-							<input class="form-control mr-sm-2" style="width: 100%;" type="search" name="filtro"
-								id="filtrar-tabela-dificuldade" placeholder="Digite a dificuldade">
-						</div>
-
-						<div class="col-2"></div>
-
-
+					<div class="col-md-4" style="text-align: center;">
+						<label for="filtrar-tabela-materia">Filtrar por matéria:</label>
+						<input class="form-control mr-sm-2" style="width: 100%; text-align: center;" type="search"
+							name="filtro" id="filtrar-tabela-materia" placeholder="Digite a matéria">
 					</div>
 
-					<table>
-						<thead>
-							<tr style="text-align: center;">
-								<th>Materia</th>
-								<th>Questão</th>
-								<th>Alternativa Correta</th>
-								<th>Nível de dificuldade</th>
-							</tr>
-						</thead>
-						<tbody id="tabela-questoes">
+					<div class="col-md-4" style="text-align: center;">
+						<label for="filtrar-tabela-dificuldade">Filtrar por dificuldade:</label>
+						<input class="form-control mr-sm-2" style="width: 100%; text-align: center;" type="search"
+							name="filtro" id="filtrar-tabela-dificuldade" placeholder="Digite a dificuldade">
+					</div>
 
-							<!-- <tr class="questao" id="primeira-questao">
+					<div class="col-md-2"></div>
+
+				</div>
+
+				<table>
+					<thead>
+						<tr style="text-align: center;">
+							<th>Materia</th>
+							<th>Questão</th>
+							<th>Alternativa Correta</th>
+							<th>Nível de dificuldade</th>
+						</tr>
+					</thead>
+					<tbody id="tabela-questoes">
+
+						<!-- <tr class="questao" id="primeira-questao">
 								<td class="info-materia">Lógica de Programação</td>
 								<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio
 									vitae corporis a nisi </td>
@@ -153,10 +154,10 @@
 							</tr> -->
 
 
-						</tbody>
-					</table>
+					</tbody>
+				</table>
 
-				</fieldset>
+
 
 			</form>
 
