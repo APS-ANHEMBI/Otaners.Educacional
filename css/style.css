@@ -74,6 +74,6 @@ label{
     align-content: center;
 }
 
-td {
+.pergunta {
     cursor: pointer;
 }

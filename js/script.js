@@ -1,4 +1,13 @@
+var Questao = '';
+
 $(document).ready(function () {
+
+    // Serve para identificar o click nas questões da tabela
+    if (typeof ($('#tabela-questoes')) != 'undefined' && $('#tabela-questoes') != null) {
+        $('#tabela-questoes').click(function () {
+            AbrirModal();
+        });
+    }
 
     // Impede o FORM de dar submit, e obriga ele executar o Metodo "Login_Professor"
     if (typeof ($('#LoginForm')) != 'undefined' && $('#LoginForm') != null) {
@@ -143,12 +152,10 @@ function Buscar_Questoes() {
             $(function () {
                 $.each(response, function (i, item) {
                     var $tr = $('<tr class="questao">').append(
-                        $('<td class="info-materia">').text(item.materia),
-                        $('<td class="info-questao">').text(item.pergunta),
+                        $('<td class="info-questao text-primary pergunta" id="btnPergunta" data-toggle="modal" data-target="#QuestaoModal">').text(item.pergunta),
                         $('<td class="info-alterCorreta">').text(item.resposta_correta),
-                        $('<td class="info-nivelDificuldade">').text(item.semestre),
-                        $('<td>').append('<input type="button" value="Editar" class="btn btn-outline-primary form-control">'),
-                        $('<td>').append('<input type="button" value="Deletar" class="btn btn-outline-danger form-control">')
+                        $('<td class="info-materia">').text(item.materia),
+                        $('<td class="info-nivelDificuldade">').text(item.semestre)
                     ).appendTo('#tabela-questoes');
 
                 });
@@ -159,4 +166,58 @@ function Buscar_Questoes() {
         }
     });
 
+}
+
+function BuscarQuestao() {
+    $.ajax({
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Perguntas_Pergunta?pergunta=' + arguments[0],
+        data: null,
+        dataType: 'json',
+        success: function (msg) {
+            if (msg == "" || msg == null) {
+                $('#QuestaoModal').modal('hide');
+            } else {
+                var response = JSON.stringify(msg);
+                response = $.parseJSON(response);
+
+                $(function () {
+                    $.each(response, function (i, item) {
+                        txtResposta.value = item.resposta_correta;
+                        txtRespostaIncorreta1.value = item.resposta_incorreta1;
+                        txtRespostaIncorreta2.value = item.resposta_incorreta2;
+                        txtRespostaIncorreta3.value = item.resposta_incorreta3;
+                        txtRespostaIncorreta4.value = item.resposta_incorreta4;
+                        txtMateria.value = item.materia;
+                        txtSemestre.value = item.semestre;
+                    });
+                });
+            }
+        }, error: function () {
+
+        }
+    });
+}
+
+// Função de deletar Questões
+function DeletarQuestao() {
+
+}
+
+// Função de deletar Questões
+function EditarQuestao() {
+
+}
+
+function AbrirModal() {
+    var tbl = document.getElementById("tabela-questoes");
+    if (tbl != null) {
+        for (var i = 0; i < tbl.rows.length; i++) {
+            for (var j = 0; j < tbl.rows[i].cells.length; j++) {
+                tbl.rows[i].cells[j].onclick = function () {
+                    txtPergunta.value = this.innerHTML;
+                    BuscarQuestao(this.innerHTML);
+                };
+            }
+        }
+    }
 }
