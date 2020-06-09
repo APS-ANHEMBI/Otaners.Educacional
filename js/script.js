@@ -1,13 +1,7 @@
-var Questao = '';
+// var Questao = '';
+var modalAberto = 0;
 
 $(document).ready(function () {
-
-    // Serve para identificar o click nas questões da tabela
-    if (typeof ($('#tabela-questoes')) != 'undefined' && $('#tabela-questoes') != null) {
-        $('#tabela-questoes').click(function () {
-            AbrirModal();
-        });
-    }
 
     // Impede o FORM de dar submit, e obriga ele executar o Metodo "Login_Professor"
     if (typeof ($('#LoginForm')) != 'undefined' && $('#LoginForm') != null) {
@@ -152,7 +146,7 @@ function Buscar_Questoes() {
             $(function () {
                 $.each(response, function (i, item) {
                     var $tr = $('<tr class="questao">').append(
-                        $('<td class="info-questao text-primary pergunta" id="btnPergunta" data-toggle="modal" data-target="#QuestaoModal">').text(item.pergunta),
+                        $('<td class="info-questao text-primary pergunta" id="btnPergunta">').text(item.pergunta),
                         $('<td class="info-alterCorreta">').text(item.resposta_correta),
                         $('<td class="info-materia">').text(item.materia),
                         $('<td class="info-nivelDificuldade">').text(item.semestre)
@@ -161,14 +155,14 @@ function Buscar_Questoes() {
                 });
             });
 
-
+            ConfigurarTabelaParaAceitarClicks();
 
         }
     });
 
 }
 
-function BuscarQuestao() {
+function VerificarQuestao() {
     $.ajax({
         url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Perguntas_Pergunta?pergunta=' + arguments[0],
         data: null,
@@ -191,6 +185,9 @@ function BuscarQuestao() {
                         txtSemestre.value = item.semestre;
                     });
                 });
+
+                $('#QuestaoModal').modal('show');
+
             }
         }, error: function () {
 
@@ -208,16 +205,19 @@ function EditarQuestao() {
 
 }
 
-function AbrirModal() {
-    var tbl = document.getElementById("tabela-questoes");
-    if (tbl != null) {
-        for (var i = 0; i < tbl.rows.length; i++) {
-            for (var j = 0; j < tbl.rows[i].cells.length; j++) {
-                tbl.rows[i].cells[j].onclick = function () {
-                    txtPergunta.value = this.innerHTML;
-                    BuscarQuestao(this.innerHTML);
-                };
+function ConfigurarTabelaParaAceitarClicks() {
+    // Serve para identificar o click nas questões da tabela
+    if (typeof ($('#tabela-questoes')) != 'undefined' && $('#tabela-questoes') != null) {
+        $('#tabela-questoes').ready(function () {
+            var tbl = document.getElementById("tabela-questoes");
+            for (var i = 0; i < tbl.rows.length; i++) {
+                for (var j = 0; j < tbl.rows[i].cells.length; j++) {
+                    tbl.rows[i].cells[j].onclick = function () {
+                        txtPergunta.value = this.innerHTML;
+                        VerificarQuestao(this.innerHTML);
+                    };
+                }
             }
-        }
+        });
     }
 }
