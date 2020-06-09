@@ -186,6 +186,7 @@ function VerificarQuestao() {
                     });
                 });
 
+                $(".resizable").css({ 'resize': 'both', 'max-width': '100%', 'width': '100%', 'height': '8vh' });
                 $('#QuestaoModal').modal('show');
 
             }

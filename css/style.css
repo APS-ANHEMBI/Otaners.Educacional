@@ -77,3 +77,12 @@ label{
 .pergunta {
     cursor: pointer;
 }
+
+div div p{
+    margin-bottom: 0;
+}
+
+textarea {
+    resize: both;
+    max-width: 100%;
+}
