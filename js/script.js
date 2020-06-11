@@ -22,16 +22,16 @@ $(document).ready(function () {
     // Impede o FORM de dar submit, e obriga ele executar o Metodo "Login_Professor"
     if (typeof ($('#LoginForm')) != 'undefined' && $('#LoginForm') != null) {
         $('#LoginForm').submit(function () {
+            event.preventDefault();
             Login_Professor();
-            return false;
         });
     }
 
     // Impede o FORM de dar submit, e obriga ele executar o Metodo "Cadastro_Professor"
     if (typeof ($('#CadastroForm')) != 'undefined' && $('#CadastroForm') != null) {
         $('#CadastroForm').submit(function () {
+            event.preventDefault();
             Cadastrar_Professor();
-            return false;
         });
     }
 
@@ -143,6 +143,9 @@ function Login_Professor() {
 
 // Função de Cadastro de Professores
 function Cadastrar_Professor() {
+
+    document.getElementById('txtInfo').innerHTML = '';
+
     $.ajax({
         type: 'POST',
         url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/post_Professor',
@@ -152,19 +155,23 @@ function Cadastrar_Professor() {
             "senha": document.getElementById("senha").value,
             "nome": document.getElementById("nome").value,
             "dataNascimento": document.getElementById("dataNascimento").value,
-            "curso": document.getElementById("curso").value,
-            "instituicao": document.getElementById("instituicao").value
+            "curso": document.getElementById("txtCurso").value,
+            "instituicao": document.getElementById("txtInstituicao").value
         }),
         success: function (msg) {
-            document.getElementById("email").text = "";
-            document.getElementById("senha").text = "";
-            document.getElementById("nome").text = "";
-            document.getElementById("curso").text = "";
-            document.getElementById("instituicao").text = "";
-            alert(msg);
-            location.replace('index.html');
+
+            if (msg == 'Professor cadastrado com sucesso!') {
+                document.getElementById('txtInfo').innerHTML = '';
+                alert(msg);
+                location.replace('index.html');
+            } else if (msg == 'Esse e-mail já está cadastrado, utilize outro, por favor!') {
+                document.getElementById('txtInfo').innerHTML = 'Esse e-mail já está cadastrado, utilize outro, por favor!';
+                document.getElementById("email").focus();
+            }
+
         }, error: function (msg) {
-            alert(msg);
+            document.getElementById('txtInfo').innerHTML = msg;
+            document.getElementById("email").focus();
         },
         contentType: "application/json"
     });
