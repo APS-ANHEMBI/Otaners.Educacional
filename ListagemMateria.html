@@ -29,7 +29,7 @@
     <title>Otaner's Educacional Management</title>
 </head>
 
-<body>
+<body onload="Buscar_Materias();">
 
     <!--NAVBAR-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -50,6 +50,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="Principal.html">Listar Questões</a>
                         <a class="dropdown-item" href="ListagemMateria.html">Listar Matérias</a>
+                        <a class="dropdown-item" href="ListagemDificuldade.html">Listar Dificuldades</a>
                         <!-- <div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="#">Mais opções</a> -->
                     </div>
@@ -101,9 +102,41 @@
     <div onclick="window.location.href = ('CadastroMateria.html');" class="float"></div>
     <!-- FLOATING BUTTON -->
 
+    <br>
+    <br>
+
     <div class="container">
         <div class="row">
+            <!-- Tabela -->
+            <table class="table" id="TabelaQuestoes">
+                <thead class="thead-dark">
+                    <tr style="text-align: center;">
+                        <th>ID</th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-materia">
 
+                    <!-- <tr class="questao" id="primeira-questao">
+                    <td class="info-materia">Lógica de Programação</td>
+                    <td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio
+                        vitae corporis a nisi </td>
+                    <td class="info-alterCorreta">B</td>
+                    <td class="info-nivelDificuldade">Fácil</td>
+                </tr>
+
+                <tr class="questao">
+                    <td class="info-materia">Engenharia de Software</td>
+                    <td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio
+                        vitae corporis a nisi </td>
+                    <td class="info-alterCorreta">D</td>
+                    <td class="info-nivelDificuldade">Média</td>
+                </tr> -->
+
+
+                </tbody>
+            </table>
+            <!-- Tabela -->
         </div>
     </div>
 
