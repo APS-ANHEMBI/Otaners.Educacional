@@ -63,7 +63,7 @@ label{
     padding: 5px 10px;
     width: 20%;
 }
-.criar-conta{
+.txtLogin{
     float: right; 
     margin-top: 2%
 }
@@ -85,4 +85,13 @@ div div p{
 textarea {
     resize: both;
     max-width: 100%;
+}
+
+.falselink {
+    cursor: pointer;
+    font-size: medium;
+}
+
+.falselink:hover {
+    text-decoration: underline;
 }

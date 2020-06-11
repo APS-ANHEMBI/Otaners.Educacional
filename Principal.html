@@ -172,10 +172,9 @@
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="Principal.html">Listar Questões</a>
-						<a class="dropdown-item" href="CadastroQuestão.html">Cadastrar Questão</a>
-						<a class="dropdown-item" href="CadastroMateria.html">Cadastrar Matéria</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Mais opções</a>
+						<a class="dropdown-item" href="CadastroMateria.html">Listar Matérias</a>
+						<!-- <div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Mais opções</a> -->
 					</div>
 				</li>
 
@@ -185,12 +184,12 @@
 						Professores
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="CadastroCurso.html">Listar Cursos</a>
+						<a class="dropdown-item" href="CadastroInstituicao.html">Listar Instituições</a>
+						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="RecomendarProfessores.html">Recomendação de Professores</a>
 						<a class="dropdown-item" href="ResetarSenhas.html">Resets de senhas de Professores</a>
-						<a class="dropdown-item" href="CadastroCurso.html">Cadastrar Curso</a>
-						<a class="dropdown-item" href="CadastroInstituicao.html">Cadastrar Instituição</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Mais opções</a>
+						<!-- <a class="dropdown-item" href="#">Mais opções</a> -->
 					</div>
 				</li>
 
@@ -204,15 +203,12 @@
 				<ul class="navbar-nav mr-auto">
 
 					<li class="nav-item dropdown" style="margin-left: 10%;">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							{ Nome do Professor }
-						</a>
+						<a id="txtNomeProfessor" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="#">Perfil</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" style="cursor: pointer;"
-								onclick="location.replace('index.html');">Sair</a>
+							<a class="dropdown-item" style="cursor: pointer;" onclick="Logout();">Sair</a>
 						</div>
 					</li>
 

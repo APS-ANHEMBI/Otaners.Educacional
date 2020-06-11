@@ -1,7 +1,23 @@
-// var Questao = '';
-var modalAberto = 0;
-
 $(document).ready(function () {
+
+    // Controle da sessao do professor
+    NomeProfessor = localStorage.getItem('NomeProfessor');
+    IDProfessor = localStorage.getItem('IDProfessor');
+
+    // Página de Login
+    if ((location.pathname).includes('index.html')) {
+        if (IDProfessor != null) {
+            window.location.href = ('Principal.html');
+        }
+    }
+    // Outras Páginas
+    else {
+        if (IDProfessor == null) {
+            window.location.href = ('index.html');
+        }
+        // Adiciona o nome do professor na navbar
+        txtNomeProfessor.innerHTML = NomeProfessor;
+    }
 
     // Impede o FORM de dar submit, e obriga ele executar o Metodo "Login_Professor"
     if (typeof ($('#LoginForm')) != 'undefined' && $('#LoginForm') != null) {
@@ -72,6 +88,7 @@ $(document).ready(function () {
             }
         });
     }
+
 });
 
 // Função de Login
@@ -86,7 +103,9 @@ function Login_Professor() {
         }),
         success: function (msg) {
             if (msg == 'Bem Vindo !') {
-                window.location.href = ('Principal.html');
+
+                IniciarSessao();
+
             } else {
                 document.getElementById('txtInfo').innerHTML = 'Credenciais inválidas!';
                 document.getElementById("senha").value = '';
@@ -162,6 +181,7 @@ function Buscar_Questoes() {
 
 }
 
+// Verifica se uma Questao existe (faz a busca pela Pergunta)
 function VerificarQuestao() {
     $.ajax({
         url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Perguntas_Pergunta?pergunta=' + arguments[0],
@@ -206,6 +226,7 @@ function EditarQuestao() {
 
 }
 
+// Serve para criar o clique na tabela de Questões
 function ConfigurarTabelaParaAceitarClicks() {
     // Serve para identificar o click nas questões da tabela
     if (typeof ($('#tabela-questoes')) != 'undefined' && $('#tabela-questoes') != null) {
@@ -221,4 +242,35 @@ function ConfigurarTabelaParaAceitarClicks() {
             }
         });
     }
+}
+
+// Cria a sessao quando o Professor efetuar Login
+function IniciarSessao() {
+    $.ajax({
+        type: 'POST',
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Professor',
+        dataType: 'json',
+        data: JSON.stringify({
+            "email": document.getElementById("email").value,
+            "senha": document.getElementById("senha").value
+        }),
+        success: function (msg) {
+
+            localStorage.setItem('NomeProfessor', msg[0].nome);
+            localStorage.setItem('IDProfessor', msg[0]._id.$oid);
+            window.location.href = ('Principal.html');
+
+        }, error: function (msg) {
+            alert('error');
+        },
+        contentType: "application/json"
+    });
+}
+
+// Faz Logout, e finaliza a sessao do Professor
+function Logout() {
+    localStorage.removeItem('NomeProfessor');
+    localStorage.removeItem('IDProfessor');
+    localStorage.clear();
+    location.replace('index.html');
 }
