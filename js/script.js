@@ -182,22 +182,30 @@ function Buscar_Questoes() {
 
             var response = JSON.stringify(msg);
             response = $.parseJSON(response);
-            console.log();
+            var qteQuestoes = (msg.length);
 
-            $(function () {
-                $.each(response, function (i, item) {
-                    var $tr = $('<tr class="questao">').append(
-                        $('<td class="info-questao text-primary pergunta" id="btnPergunta">').text(item.pergunta),
-                        $('<td class="info-alterCorreta">').text(item.respostaCorreta),
-                        $('<td class="info-materia">').text(item.materia),
-                        $('<td class="info-nivelDificuldade">').text(item.dificuldade)
-                    ).appendTo('#tabela-questoes');
+            if (qteQuestoes > 0) {
+                $(function () {
+                    $.each(response, function (i, item) {
 
+                        i++;
+
+                        var $tr = $('<tr class="questao">').append(
+                            $('<td class="info-questao text-primary pergunta" id="btnPergunta">').text(item.pergunta),
+                            $('<td class="info-alterCorreta">').text(item.respostaCorreta),
+                            $('<td class="info-materia">').text(item.materia),
+                            $('<td class="info-nivelDificuldade">').text(item.dificuldade)
+                        ).appendTo('#tabela-questoes');
+
+
+
+                    });
                 });
-            });
 
-            ConfigurarTabelaParaAceitarClicks();
-
+                ConfigurarTabelaParaAceitarClicks();
+            } else {
+                txtSemRegistro.innerHTML = 'SEM REGISTROS';
+            }
         }
     });
 

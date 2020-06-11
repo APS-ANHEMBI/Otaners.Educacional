@@ -225,42 +225,38 @@
 	<!-- FLOATING BUTTON -->
 
 	<div class="container">
+		<form id="form-adiciona">
 
-		<div>
-			<form id="form-adiciona">
-
-				<div class="row">
-
-					<div class="col-md-2"></div>
-
-					<div class="col-md-4" style="text-align: center;">
-						<label for="filtrar-tabela-materia">Filtrar por matéria:</label>
-						<input class="form-control mr-sm-2" style="width: 100%; text-align: center;" type="search"
-							name="filtro" id="filtrar-tabela-materia" placeholder="Digite a matéria">
-					</div>
-
-					<div class="col-md-4" style="text-align: center;">
-						<label for="filtrar-tabela-dificuldade">Filtrar por dificuldade:</label>
-						<input class="form-control mr-sm-2" style="width: 100%; text-align: center;" type="search"
-							name="filtro" id="filtrar-tabela-dificuldade" placeholder="Digite a dificuldade">
-					</div>
-
-					<div class="col-md-2"></div>
-
+			<!-- Filtros -->
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-4" style="text-align: center;">
+					<label for="filtrar-tabela-materia">Filtrar por matéria:</label>
+					<input class="form-control mr-sm-2" style="width: 100%; text-align: center;" type="search"
+						name="filtro" id="filtrar-tabela-materia" placeholder="Digite a matéria">
 				</div>
+				<div class="col-md-4" style="text-align: center;">
+					<label for="filtrar-tabela-dificuldade">Filtrar por dificuldade:</label>
+					<input class="form-control mr-sm-2" style="width: 100%; text-align: center;" type="search"
+						name="filtro" id="filtrar-tabela-dificuldade" placeholder="Digite a dificuldade">
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<!-- Filtros -->
 
-				<table class="table" id="TabelaQuestoes">
-					<thead class="thead-dark">
-						<tr style="text-align: center;">
-							<th>Pergunta</th>
-							<th>Resposta</th>
-							<th>Materia</th>
-							<th>Nível de dificuldade</th>
-						</tr>
-					</thead>
-					<tbody id="tabela-questoes">
+			<!-- Tabela -->
+			<table class="table" id="TabelaQuestoes">
+				<thead class="thead-dark">
+					<tr style="text-align: center;">
+						<th>Pergunta</th>
+						<th>Resposta</th>
+						<th>Materia</th>
+						<th>Nível de dificuldade</th>
+					</tr>
+				</thead>
+				<tbody id="tabela-questoes">
 
-						<!-- <tr class="questao" id="primeira-questao">
+					<!-- <tr class="questao" id="primeira-questao">
 								<td class="info-materia">Lógica de Programação</td>
 								<td class="info-questao">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio
 									vitae corporis a nisi </td>
@@ -277,14 +273,21 @@
 							</tr> -->
 
 
-					</tbody>
-				</table>
+				</tbody>
+			</table>
+			<!-- Tabela -->
 
+			<!-- Informativo -->
+			<div class="row">
+				<div class="col-md-12" style="text-align: center;">
+					<h3 id="txtSemRegistro"></h3>
+				</div>
+			</div>
+			<!-- Informativo -->
 
+		</form>
 
-			</form>
-
-		</div>
+	</div>
 
 	</div>
 
