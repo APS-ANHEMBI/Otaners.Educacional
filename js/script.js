@@ -4,8 +4,8 @@ $(document).ready(function () {
     NomeProfessor = localStorage.getItem('NomeProfessor');
     IDProfessor = localStorage.getItem('IDProfessor');
 
-    // Página de Login
-    if ((location.pathname).includes('index.html')) {
+    // Página de Login/Cadastro
+    if ((location.pathname).includes('index.html') || (location.pathname).includes('CadastroProfessor.html')) {
         if (IDProfessor != null) {
             window.location.href = ('Principal.html');
         }
@@ -89,13 +89,34 @@ $(document).ready(function () {
         });
     }
 
+    // Alimenta os campos "select" com o banco
+    if ((location.pathname).includes('CadastroProfessor.html') || (location.pathname).includes('CadastroQuest')) {
+
+        if (typeof (txtInstituicao) != 'undefined' && txtInstituicao != null) {
+            PreecherIntituicoes();
+        }
+
+        if (typeof (txtCurso) != 'undefined' && txtCurso != null) {
+            PreecherCursos();
+        }
+
+        if (typeof (txtMateria) != 'undefined' && txtMateria != null) {
+            PreecherMaterias();
+        }
+
+        if (typeof (txtDificuldade) != 'undefined' && txtDificuldade != null) {
+            PreecherDificuldades();
+        }
+
+    }
+
 });
 
 // Função de Login
 function Login_Professor() {
     $.ajax({
         type: 'POST',
-        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/loginProfessor',
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/post_LoginProfessor',
         dataType: 'json',
         data: JSON.stringify({
             "email": document.getElementById("email").value,
@@ -124,12 +145,13 @@ function Login_Professor() {
 function Cadastrar_Professor() {
     $.ajax({
         type: 'POST',
-        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/cadastrarProfessor',
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/post_Professor',
         dataType: 'json',
         data: JSON.stringify({
             "email": document.getElementById("email").value,
             "senha": document.getElementById("senha").value,
             "nome": document.getElementById("nome").value,
+            "dataNascimento": document.getElementById("dataNascimento").value,
             "curso": document.getElementById("curso").value,
             "instituicao": document.getElementById("instituicao").value
         }),
@@ -153,7 +175,7 @@ function Cadastrar_Professor() {
 function Buscar_Questoes() {
 
     $.ajax({
-        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Perguntas',
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Questoes',
         data: null,
         dataType: 'json',
         success: function (msg) {
@@ -166,9 +188,9 @@ function Buscar_Questoes() {
                 $.each(response, function (i, item) {
                     var $tr = $('<tr class="questao">').append(
                         $('<td class="info-questao text-primary pergunta" id="btnPergunta">').text(item.pergunta),
-                        $('<td class="info-alterCorreta">').text(item.resposta_correta),
+                        $('<td class="info-alterCorreta">').text(item.respostaCorreta),
                         $('<td class="info-materia">').text(item.materia),
-                        $('<td class="info-nivelDificuldade">').text(item.semestre)
+                        $('<td class="info-nivelDificuldade">').text(item.dificuldade)
                     ).appendTo('#tabela-questoes');
 
                 });
@@ -184,7 +206,7 @@ function Buscar_Questoes() {
 // Verifica se uma Questao existe (faz a busca pela Pergunta)
 function VerificarQuestao() {
     $.ajax({
-        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Perguntas_Pergunta?pergunta=' + arguments[0],
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Questoes_Pergunta?pergunta=' + arguments[0],
         data: null,
         dataType: 'json',
         success: function (msg) {
@@ -196,13 +218,13 @@ function VerificarQuestao() {
 
                 $(function () {
                     $.each(response, function (i, item) {
-                        txtResposta.value = item.resposta_correta;
-                        txtRespostaIncorreta1.value = item.resposta_incorreta1;
-                        txtRespostaIncorreta2.value = item.resposta_incorreta2;
-                        txtRespostaIncorreta3.value = item.resposta_incorreta3;
-                        txtRespostaIncorreta4.value = item.resposta_incorreta4;
+                        txtResposta.value = item.respostaCorreta;
+                        txtRespostaIncorreta1.value = item.resposta1;
+                        txtRespostaIncorreta2.value = item.resposta2;
+                        txtRespostaIncorreta3.value = item.resposta3;
+                        txtRespostaIncorreta4.value = item.resposta4;
                         txtMateria.value = item.materia;
-                        txtSemestre.value = item.semestre;
+                        txtDificuldade.value = item.dificuldade;
                     });
                 });
 
@@ -273,4 +295,68 @@ function Logout() {
     localStorage.removeItem('IDProfessor');
     localStorage.clear();
     location.replace('index.html');
+}
+
+// Preenche os campos "select" com as Instituicoes do banco de dados
+function PreecherIntituicoes() {
+    $.ajax({
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Instituicoes',
+        data: null,
+        dataType: 'json',
+        success: function (msg) {
+            var inner_html = '';
+            for (i = 0; i < msg.length; i++) {
+                inner_html += '<option>' + msg[i].nome + '</option>';
+            }
+            txtInstituicao.innerHTML = inner_html;
+        }
+    });
+}
+
+// Preenche os campos "select" com os Cursos do banco de dados
+function PreecherCursos() {
+    $.ajax({
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Cursos',
+        data: null,
+        dataType: 'json',
+        success: function (msg) {
+            var inner_html = '';
+            for (i = 0; i < msg.length; i++) {
+                inner_html += '<option>' + msg[i].nome + '</option>';
+            }
+            txtCurso.innerHTML = inner_html;
+        }
+    });
+}
+
+// Preenche os campos "select" com as Materias do banco de dados
+function PreecherMaterias() {
+    $.ajax({
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Materias',
+        data: null,
+        dataType: 'json',
+        success: function (msg) {
+            var inner_html = '';
+            for (i = 0; i < msg.length; i++) {
+                inner_html += '<option>' + msg[i].nome + '</option>';
+            }
+            txtMateria.innerHTML = inner_html;
+        }
+    });
+}
+
+// Preenche os campos "select" com as Dificuldades do banco de dados
+function PreecherDificuldades() {
+    $.ajax({
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Dificuldades',
+        data: null,
+        dataType: 'json',
+        success: function (msg) {
+            var inner_html = '';
+            for (i = 0; i < msg.length; i++) {
+                inner_html += '<option>' + msg[i].nome + '</option>';
+            }
+            txtDificuldade.innerHTML = inner_html;
+        }
+    });
 }
