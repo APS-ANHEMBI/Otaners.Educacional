@@ -85,6 +85,8 @@ div div p{
 textarea {
     resize: both;
     max-width: 100%;
+    min-width: 20%;
+    min-height: 10vh;
 }
 
 .falselink {

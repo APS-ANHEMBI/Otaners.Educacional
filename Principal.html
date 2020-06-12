@@ -51,28 +51,28 @@
 					<div class="col-md-1"></div>
 					<div class="col-md-10">
 						<p>Alternativa 1:</p>
-						<textarea class="form-control resizable" type="text" id="txtRespostaIncorreta1"></textarea>
+						<textarea class="form-control resizable" type="text" id="txtResposta1"></textarea>
 					</div>
 					<div class="col-md-1"></div>
 
 					<div class="col-md-1"></div>
 					<div class="col-md-10">
 						<p>Alternativa 2:</p>
-						<textarea class="form-control resizable" type="text" id="txtRespostaIncorreta2"></textarea>
+						<textarea class="form-control resizable" type="text" id="txtResposta2"></textarea>
 					</div>
 					<div class="col-md-1"></div>
 
 					<div class="col-md-1"></div>
 					<div class="col-md-10">
 						<p>Alternativa 3:</p>
-						<textarea class="form-control resizable" type="text" id="txtRespostaIncorreta3"></textarea>
+						<textarea class="form-control resizable" type="text" id="txtResposta3"></textarea>
 					</div>
 					<div class="col-md-1"></div>
 
 					<div class="col-md-1"></div>
 					<div class="col-md-10">
 						<p>Alternativa 4:</p>
-						<textarea class="form-control resizable" type="text" id="txtRespostaIncorreta4"></textarea>
+						<textarea class="form-control resizable" type="text" id="txtResposta4"></textarea>
 					</div>
 					<div class="col-md-1"></div>
 
@@ -81,29 +81,12 @@
 					<div class="col-md-8" style="margin-top: 2%;">
 						<p>Matéria:</p>
 						<select id="txtMateria" class="form-control" style="cursor: pointer;">
-							<option>Análise e Desenvolvimento de Sistemas</option>
-							<option>Ciências da Computação</option>
-							<option>Engenharia da Computação</option>
-							<option>Engenharia de Software</option>
-							<option>Jogos Digitais</option>
-							<option>Sistemas de Informação</option>
-							<option>Sistemas para Internet</option>
 						</select>
 					</div>
 
 					<div class="col-md-2" style="margin-top: 2%;">
-						<p>Semestre:</p>
-						<select id="txtSemestre" class="form-control" style="cursor: pointer;">
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-							<option>6</option>
-							<option>7</option>
-							<option>8</option>
-							<option>9</option>
-							<option>10</option>
+						<p>Dificuldade:</p>
+						<select id="txtDificuldade" class="form-control" style="cursor: pointer;">
 						</select>
 					</div>
 					<div class="col-md-1"></div>
@@ -119,30 +102,16 @@
 
 
 							<button type="button" class="btn btn-outline-danger col-md-3" style="width: 100%;"
-								id="btnDeletar">Deletar
+								id="btnDeletar" onclick="DeletarQuestao();">Deletar
 								questão</button>
 
+							<h3 style="margin-left: 1%;"></h3>
+
 							<button type="button" class="btn btn-outline-primary col-md-3" style="width: 100%;"
-								id="btnSalvar">Salvar
+								id="btnSalvar" onclick="EditarQuestao();">Salvar
 								alterações</button>
 
 
-							<div class="col-md-1"></div>
-
-							<div class="col-md-1"></div>
-							<div class="col-md-10" style="margin-top: 2%;">
-								<div class="alert alert-warning alert-dismissible">
-									<button type="button" class="close fade show" data-dismiss="alert">&times;</button>
-									<strong>Tem certeza que quer efetuar essa operação?</strong>
-
-									<div style="margin-top: 2%;">
-										<label style="cursor: pointer;">Sim</label>
-										<label style="cursor: pointer;" class="fade show"
-											data-dismiss="alert">Não</label>
-									</div>
-
-								</div>
-							</div>
 							<div class="col-md-1"></div>
 
 						</div>

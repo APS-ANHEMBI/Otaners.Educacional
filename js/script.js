@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    // Controle da sessao do professor
+    // --- Controle da sessao do professor ------------------
     NomeProfessor = localStorage.getItem('NomeProfessor');
     IDProfessor = localStorage.getItem('IDProfessor');
 
@@ -18,6 +18,7 @@ $(document).ready(function () {
         // Adiciona o nome do professor na navbar
         txtNomeProfessor.innerHTML = NomeProfessor;
     }
+    // --- Controle da sessao do professor ------------------
 
     // Impede o FORM de dar submit, e obriga ele executar o Metodo "Login_Professor"
     if (typeof ($('#LoginForm')) != 'undefined' && $('#LoginForm') != null) {
@@ -28,10 +29,18 @@ $(document).ready(function () {
     }
 
     // Impede o FORM de dar submit, e obriga ele executar o Metodo "Cadastro_Professor"
-    if (typeof ($('#CadastroForm')) != 'undefined' && $('#CadastroForm') != null) {
-        $('#CadastroForm').submit(function () {
+    if (typeof ($('#CadastroProfessorForm')) != 'undefined' && $('#CadastroProfessorForm') != null) {
+        $('#CadastroProfessorForm').submit(function () {
             event.preventDefault();
             Cadastrar_Professor();
+        });
+    }
+
+    // Impede o FORM de dar submit, e obriga ele executar o Metodo "Cadastro_Professor"
+    if (typeof ($('#CadastroQuestaoForm')) != 'undefined' && $('#CadastroQuestaoForm') != null) {
+        $('#CadastroQuestaoForm').submit(function () {
+            event.preventDefault();
+            Cadastrar_Questao();
         });
     }
 
@@ -112,6 +121,7 @@ $(document).ready(function () {
 
 });
 
+// PROFESSOR --------------------------------------
 // Função de Login
 function Login_Professor() {
     $.ajax({
@@ -178,6 +188,79 @@ function Cadastrar_Professor() {
 
 }
 
+// Cria a sessao quando o Professor efetuar Login
+function IniciarSessao() {
+    $.ajax({
+        type: 'POST',
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Professor',
+        dataType: 'json',
+        data: JSON.stringify({
+            "email": document.getElementById("email").value,
+            "senha": document.getElementById("senha").value
+        }),
+        success: function (msg) {
+
+            localStorage.setItem('NomeProfessor', msg[0].nome);
+            localStorage.setItem('IDProfessor', msg[0]._id.$oid);
+            window.location.href = ('Principal.html');
+
+        }, error: function (msg) {
+            alert('error');
+        },
+        contentType: "application/json"
+    });
+}
+
+// Faz Logout, e finaliza a sessao do Professor
+function Logout() {
+    localStorage.removeItem('NomeProfessor');
+    localStorage.removeItem('IDProfessor');
+    localStorage.clear();
+    location.replace('index.html');
+}
+// PROFESSOR --------------------------------------
+
+
+// QUESTÕES --------------------------------------
+// Função de Cadastro de Questões
+function Cadastrar_Questao() {
+
+    document.getElementById('txtInfo').innerHTML = '';
+
+    $.ajax({
+        type: 'POST',
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/post_Questao',
+        dataType: 'json',
+        data: JSON.stringify({
+            "pergunta": pergunta.value,
+            "dificuldade": txtDificuldade.value,
+            "materia": txtMateria.value,
+            "respostaCorreta": respostaCorreta.value,
+            "resposta1": resposta1.value,
+            "resposta2": resposta2.value,
+            "resposta3": resposta3.value,
+            "resposta4": resposta4.value
+        }),
+        success: function (msg) {
+
+            if (msg == 'Questão cadastrada com sucesso!') {
+                document.getElementById('txtInfo').innerHTML = '';
+                alert(msg);
+                location.replace('Principal.html');
+            } else {
+                document.getElementById('txtInfo').innerHTML = msg;
+                document.getElementById("pergunta").focus();
+            }
+
+        }, error: function (msg) {
+            document.getElementById('txtInfo').innerHTML = msg;
+            document.getElementById("pergunta").focus();
+        },
+        contentType: "application/json"
+    });
+
+}
+
 // Função de busca de Questões
 function Buscar_Questoes() {
 
@@ -219,6 +302,138 @@ function Buscar_Questoes() {
 
 }
 
+// Função de deletar Questões
+function DeletarQuestao() {
+
+    var confimacao = confirm("Tem certeza que quer excluir essa pergunta?");
+
+    if (confimacao) {
+        $.ajax({
+            type: 'DELETE',
+            url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/delete_Questao?pergunta=' + txtPergunta.value,
+            dataType: 'json',
+            success: function (msg) {
+
+                if (msg == 'Questao excluida com sucesso!') {
+                    $('#QuestaoModal').modal('hide');
+                    ResetarTabelaQuestoes();
+                } else {
+                    alert(msg);
+                }
+
+            }, error: function (msg) {
+                alert(msg);
+            },
+            contentType: "application/json"
+        });
+    } else {
+
+    }
+
+
+}
+
+// Função de deletar Questões
+function EditarQuestao() {
+
+    var confimacao = confirm("Tem certeza que quer salvar as alteções?");
+
+    if (confimacao) {
+
+        $.ajax({
+            type: 'PUT',
+            url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/put_Questao?pergunta=' + sessionStorage.getItem('Pergunta'),
+            data: JSON.stringify({
+                "pergunta": txtPergunta.value,
+                "dificuldade": txtDificuldade.value,
+                "materia": txtMateria.value,
+                "respostaCorreta": txtResposta.value,
+                "resposta1": txtResposta1.value,
+                "resposta2": txtResposta2.value,
+                "resposta3": txtResposta3.value,
+                "resposta4": txtResposta4.value
+            }),
+            dataType: 'json',
+            success: function (msg) {
+
+                if (msg == 'Questão alterada com sucesso!') {
+                    $('#QuestaoModal').modal('hide');
+                    ResetarTabelaQuestoes();
+                } else {
+                    alert(msg);
+                }
+
+                sessionStorage.removeItem('Pergunta');
+
+            }, error: function (msg) {
+                alert(msg);
+            },
+            contentType: "application/json"
+        });
+
+        $('#QuestaoModal').modal('hide');
+        ResetarTabelaQuestoes();
+
+    } else {
+
+    }
+
+}
+
+// Verifica se uma Questao existe (faz a busca pela Pergunta)
+function VerificarQuestao() {
+    $.ajax({
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Questoes_Pergunta?pergunta=' + arguments[0],
+        data: null,
+        dataType: 'json',
+        success: function (msg) {
+            if (msg == "" || msg == null) {
+                $('#QuestaoModal').modal('hide');
+            } else {
+                var response = JSON.stringify(msg);
+                response = $.parseJSON(response);
+
+                $(function () {
+                    $.each(response, function (i, item) {
+
+                        sessionStorage.setItem('Pergunta', item.pergunta);
+
+                        txtResposta.value = item.respostaCorreta;
+                        txtResposta1.value = item.resposta1;
+                        txtResposta2.value = item.resposta2;
+                        txtResposta3.value = item.resposta3;
+                        txtResposta4.value = item.resposta4;
+
+                        sessionStorage.setItem('Materia', item.materia);
+                        sessionStorage.setItem('Dificuldade', item.dificuldade);
+
+                        PreecherDificuldades();
+                        PreecherMaterias();
+
+                    });
+                });
+
+                $(".resizable").css({ 'resize': 'both', 'max-width': '100%', 'width': '100%', 'height': '8vh' });
+                $('#QuestaoModal').modal('show');
+
+            }
+        }, error: function () {
+
+        }
+    });
+}
+
+function ResetarTabelaQuestoes() {
+
+    var tabela = document.getElementById('tabela-questoes');
+    tabela.innerHTML = '';
+    Buscar_Questoes();
+
+}
+// QUESTÕES --------------------------------------
+
+
+// CURSO, MATERIA, INSTITUICAO E DIFICULDADE --------------------------------------
 // Função de busca de Curso
 function Buscar_Cursos() {
     $.ajax({
@@ -336,8 +551,7 @@ function Buscar_Dificuldades() {
 
                         var $tr = $('<tr>').append(
                             $('<td class="info-questao text-primary" id="btnPergunta">').text(item._id.$oid),
-                            $('<td>').text(item.nome),
-                            $('<td>').text(item.dificuldade)
+                            $('<td>').text(item.nome)
                         ).appendTo('#tabela-dificuldade');
                     });
                 });
@@ -348,100 +562,6 @@ function Buscar_Dificuldades() {
         }
     });
 
-}
-
-// Verifica se uma Questao existe (faz a busca pela Pergunta)
-function VerificarQuestao() {
-    $.ajax({
-        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Questoes_Pergunta?pergunta=' + arguments[0],
-        data: null,
-        dataType: 'json',
-        success: function (msg) {
-            if (msg == "" || msg == null) {
-                $('#QuestaoModal').modal('hide');
-            } else {
-                var response = JSON.stringify(msg);
-                response = $.parseJSON(response);
-
-                $(function () {
-                    $.each(response, function (i, item) {
-                        txtResposta.value = item.respostaCorreta;
-                        txtRespostaIncorreta1.value = item.resposta1;
-                        txtRespostaIncorreta2.value = item.resposta2;
-                        txtRespostaIncorreta3.value = item.resposta3;
-                        txtRespostaIncorreta4.value = item.resposta4;
-                        txtMateria.value = item.materia;
-                        txtDificuldade.value = item.dificuldade;
-                    });
-                });
-
-                $(".resizable").css({ 'resize': 'both', 'max-width': '100%', 'width': '100%', 'height': '8vh' });
-                $('#QuestaoModal').modal('show');
-
-            }
-        }, error: function () {
-
-        }
-    });
-}
-
-// Função de deletar Questões
-function DeletarQuestao() {
-
-}
-
-// Função de deletar Questões
-function EditarQuestao() {
-
-}
-
-// Serve para criar o clique na tabela de Questões
-function ConfigurarTabelaParaAceitarClicks() {
-    // Serve para identificar o click nas questões da tabela
-    if (typeof ($('#tabela-questoes')) != 'undefined' && $('#tabela-questoes') != null) {
-        $('#tabela-questoes').ready(function () {
-            var tbl = document.getElementById("tabela-questoes");
-            for (var i = 0; i < tbl.rows.length; i++) {
-                for (var j = 0; j < tbl.rows[i].cells.length; j++) {
-                    tbl.rows[i].cells[j].onclick = function () {
-                        txtPergunta.value = this.innerHTML;
-                        VerificarQuestao(this.innerHTML);
-                    };
-                }
-            }
-        });
-    }
-}
-
-// Cria a sessao quando o Professor efetuar Login
-function IniciarSessao() {
-    $.ajax({
-        type: 'POST',
-        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Professor',
-        dataType: 'json',
-        data: JSON.stringify({
-            "email": document.getElementById("email").value,
-            "senha": document.getElementById("senha").value
-        }),
-        success: function (msg) {
-
-            localStorage.setItem('NomeProfessor', msg[0].nome);
-            localStorage.setItem('IDProfessor', msg[0]._id.$oid);
-            window.location.href = ('Principal.html');
-
-        }, error: function (msg) {
-            alert('error');
-        },
-        contentType: "application/json"
-    });
-}
-
-// Faz Logout, e finaliza a sessao do Professor
-function Logout() {
-    localStorage.removeItem('NomeProfessor');
-    localStorage.removeItem('IDProfessor');
-    localStorage.clear();
-    location.replace('index.html');
 }
 
 // Preenche os campos "select" com as Instituicoes do banco de dados
@@ -487,7 +607,21 @@ function PreecherMaterias() {
             for (i = 0; i < msg.length; i++) {
                 inner_html += '<option>' + msg[i].nome + '</option>';
             }
+
             txtMateria.innerHTML = inner_html;
+            txtMateria.selectedIndex = 0;
+
+            if (sessionStorage.getItem('Materia') != null) {
+                var opts = txtMateria.options;
+                for (var opt, j = 0; opt = opts[j]; j++) {
+                    if (opt.value == sessionStorage.getItem('Materia')) {
+                        txtMateria.selectedIndex = j;
+                        sessionStorage.removeItem('Materia');
+                        break;
+                    }
+                }
+            }
+
         }
     });
 }
@@ -504,6 +638,41 @@ function PreecherDificuldades() {
                 inner_html += '<option>' + msg[i].nome + '</option>';
             }
             txtDificuldade.innerHTML = inner_html;
+            txtDificuldade.selectedIndex = 0;
+
+            if (sessionStorage.getItem('Dificuldade') != null) {
+                var opts = txtDificuldade.options;
+                for (var opt, j = 0; opt = opts[j]; j++) {
+                    if (opt.value == sessionStorage.getItem('Dificuldade')) {
+                        txtDificuldade.selectedIndex = j;
+                        sessionStorage.removeItem('Dificuldade');
+                        break;
+                    }
+                }
+            }
+
         }
     });
 }
+// CURSO, MATERIA, INSTITUICAO E DIFICULDADE --------------------------------------
+
+
+// OUTROS --------------------------------------
+// Serve para criar o clique na tabela de Questões
+function ConfigurarTabelaParaAceitarClicks() {
+    // Serve para identificar o click nas questões da tabela
+    if (typeof ($('#tabela-questoes')) != 'undefined' && $('#tabela-questoes') != null) {
+        $('#tabela-questoes').ready(function () {
+            var tbl = document.getElementById("tabela-questoes");
+            for (var i = 0; i < tbl.rows.length; i++) {
+                for (var j = 0; j < tbl.rows[i].cells.length; j++) {
+                    tbl.rows[i].cells[j].onclick = function () {
+                        txtPergunta.value = this.innerHTML;
+                        VerificarQuestao(this.innerHTML);
+                    };
+                }
+            }
+        });
+    }
+}
+// OUTROS --------------------------------------
