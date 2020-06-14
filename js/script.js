@@ -1,5 +1,13 @@
 $(document).ready(function () {
 
+    // Impede o FORM de dar submit, e obriga ele executar o Metodo "Autenticar_Professor"
+    if (typeof ($('#AutenticacaoForm')) != 'undefined' && $('#AutenticacaoForm') != null) {
+        $('#AutenticacaoForm').submit(function () {
+            event.preventDefault();
+            Autenticar_Professor();
+        });
+    }
+
     // Impede o FORM de dar submit, e obriga ele executar o Metodo "Login_Professor"
     if (typeof ($('#LoginForm')) != 'undefined' && $('#LoginForm') != null) {
         $('#LoginForm').submit(function () {
@@ -76,11 +84,6 @@ $(document).ready(function () {
                 }
             }
         });
-    }
-
-
-    if ((location.pathname).includes('CadastroProfessor.html') || (location.pathname).includes('CadastroQuest')) {
-
     }
 
 });
@@ -224,6 +227,64 @@ function AtualizarCampos() {
     if (typeof (txtDificuldade) != 'undefined' && txtDificuldade != null) {
         PreecherDificuldades();
     }
+}
+
+function Autenticar_Professor() {
+
+    var Email = document.getElementById("email").value;
+    var Senha = document.getElementById("senha").value;
+
+    // Requisição para efetuar Login (funciona para qualquer conta que existir)
+    $.ajax({
+        type: 'POST',
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/post_LoginProfessor',
+        dataType: 'json',
+        data: JSON.stringify({
+            "email": Email,
+            "senha": Senha
+        }),
+        success: function (msg) {
+            if (msg == 'Bem Vindo !') {
+
+                // Requisição para verificar se a conta recebida na requisição anterior, é a conta logada atualmente.
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Professor',
+                    dataType: 'json',
+                    data: JSON.stringify({
+                        "email": Email,
+                        "senha": Senha
+                    }),
+                    success: function (msg) {
+
+                        if (localStorage.getItem('IDProfessor') == msg[0]._id.$oid) {
+                            $('#AutenticacaoModal').modal('hide');
+                            $('#PerfilModal').modal('show');
+                        } else {
+                            document.getElementById('txtInfo').innerHTML = 'Credenciais inválidas!';
+                            document.getElementById("senha").value = '';
+                            document.getElementById("email").value = '';
+                            document.getElementById("email").focus();
+                        }
+
+                    }, error: function (msg) {
+                        document.getElementById('txtInfo').innerHTML = 'Ocorreu um erro, por favor tente novamente ...';
+                    },
+                    contentType: "application/json"
+                });
+
+
+            } else {
+                document.getElementById('txtInfo').innerHTML = 'Credenciais inválidas!';
+                document.getElementById("senha").value = '';
+                document.getElementById("email").value = '';
+                document.getElementById("email").focus();
+            }
+        }, error: function (msg) {
+            document.getElementById('txtInfo').innerHTML = 'Ocorreu um erro, por favor tente novamente ...';
+        },
+        contentType: "application/json"
+    });
 }
 // PROFESSOR --------------------------------------
 
@@ -430,6 +491,7 @@ function VerificarQuestao() {
     });
 }
 
+// Limpa a tabela, e busca os dados novamente de maneira assincrona
 function ResetarTabelaQuestoes() {
 
     var tabela = document.getElementById('tabela-questoes');

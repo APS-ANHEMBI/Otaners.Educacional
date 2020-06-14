@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- IMPORTS BOOTSTRAP E JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <!-- IMPORTS BOOTSTRAP E JQUERY -->
+
+    <script type="text/javascript" src="js/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Otaner's Educacional Management</title>
+</head>
+
+<body onload="VerificarSessao(); $('#AutenticacaoModal').modal('show');">
+
+    <!--NAVBAR-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" style="margin-left: 5%;" href="Principal.html">Otaner's Educacional Management</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item dropdown" style="margin-left: 8%;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Questões
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="Principal.html">Listar Questões</a>
+                        <a class="dropdown-item" href="ListagemMateria.html">Listar Matérias</a>
+                        <a class="dropdown-item" href="ListagemDificuldade.html">Listar Dificuldades</a>
+                        <!-- <div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Mais opções</a> -->
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown" style="margin-left: 8%;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Professores
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="ListagemCurso.html">Listar Cursos</a>
+                        <a class="dropdown-item" href="ListagemInstituicao.html">Listar Instituições</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="RecomendarProfessores.html">Recomendação de Professores</a>
+                        <a class="dropdown-item" href="ResetarSenhas.html">Resets de senhas de Professores</a>
+                        <!-- <a class="dropdown-item" href="#">Mais opções</a> -->
+                    </div>
+                </li>
+
+            </ul>
+
+
+            <form class="form-inline my-2 my-lg-0" style="margin-right: 10%;">
+                <!-- <button class="btn btn-outline-primary my-2 my-sm-0" style="width: 100%;"
+					onclick="location.replace('index.html');" type="button">Sair</button> -->
+
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item dropdown" style="margin-left: 10%;">
+                        <a id="txtNomeProfessor" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="PerfilProfessor.html">Perfil</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" style="cursor: pointer;" onclick="Logout();">Sair</a>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </form>
+        </div>
+    </nav>
+    <!--NAVBAR-->
+
+    <!-- Modal de autenticação -->
+    <div class="modal fade" id="AutenticacaoModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Autenticação de identidade</h5>
+                    <button type="button" class="close" onclick="location.replace('Principal.html')" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form id="AutenticacaoForm" style="margin-top: 0; margin-bottom: 1%;">
+                    <div class="modal-body">
+                        <label for="email">E-mail</label>
+                        <input name="email" type="email" id="email" class="input-padrao" required
+                            placeholder="exemplo.email@exemplo.com.br">
+
+                        <label for="senha">Senha</label>
+                        <input name="senha" type="password" id="senha" minlength="5" class="input-padrao" required
+                            placeholder="*************">
+
+                        <div style="width: 100%; margin-top: 1%;">
+                            <h6 id="txtInfo" style="color: red;"></h6>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <input type="submit" class="btn btn-outline-primary" value="Autenticar" />
+                        <button type="button" class="btn btn-outline-danger"
+                            onclick="location.replace('Principal.html')">Cancelar</button>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de perfil -->
+    <div class="modal" tabindex="-1" id="PerfilModal" data-backdrop="static" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editando Informações</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        onclick="location.replace('Principal.html')">
+                        <span aria-hidden=" true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body row">
+
+
+                    <div class="col-md-12">
+                        <p>Nome:</p>
+                        <input type="text" class="form-control resizable" type="text" id="txtPergunta" />
+                    </div>
+
+                    <div class="col-md-12">
+                        <p>Email:</p>
+                        <input type="text" class="form-control resizable" type="text" id="txtResposta" />
+                    </div>
+
+                    <div class="col-md-12">
+                        <p>Senha:</p>
+                        <input type="text" class="form-control resizable" type="text" id="txtResposta1" />
+                    </div>
+
+                    <div class="col-md-12">
+                        <p>Data de Nascimento:</p>
+                        <input type="text" class="form-control resizable" type="text" id="txtResposta2" />
+                    </div>
+
+                    <div class="col-md-12">
+                        <p>Instituição de Ensino:</p>
+                        <select id="txtDificuldade" class="form-control" style="cursor: pointer;">
+                        </select>
+                    </div>
+
+                    <div class="col-md-12">
+                        <p>Curso:</p>
+                        <select id="txtDificuldade" class="form-control" style="cursor: pointer;">
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <input type="submit" class="btn btn-outline-primary" value="Salvar Alterações" />
+                    <input type="submit" class="btn btn-outline-danger" value=" Cancelar"
+                        onclick="location.replace('Principal.html')" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
