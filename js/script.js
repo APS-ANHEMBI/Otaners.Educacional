@@ -1,26 +1,5 @@
 $(document).ready(function () {
 
-    // --- Controle da sessao do professor ------------------
-    NomeProfessor = localStorage.getItem('NomeProfessor');
-    IDProfessor = localStorage.getItem('IDProfessor');
-
-    // Página de Login/Cadastro
-    if ((location.pathname).includes('index.html') || (location.pathname).includes('CadastroProfessor.html') ||
-        location.pathname == 'https://mateusdonaire.github.io/Otaners.Educacional/') {
-        if (IDProfessor != null) {
-            window.location.href = ('Principal.html');
-        }
-    }
-    // Outras Páginas
-    else {
-        if (IDProfessor == null) {
-            window.location.href = ('index.html');
-        }
-        // Adiciona o nome do professor na navbar
-        txtNomeProfessor.innerHTML = NomeProfessor;
-    }
-    // --- Controle da sessao do professor ------------------
-
     // Impede o FORM de dar submit, e obriga ele executar o Metodo "Login_Professor"
     if (typeof ($('#LoginForm')) != 'undefined' && $('#LoginForm') != null) {
         $('#LoginForm').submit(function () {
@@ -99,24 +78,8 @@ $(document).ready(function () {
         });
     }
 
-    // Alimenta os campos "select" com o banco
+
     if ((location.pathname).includes('CadastroProfessor.html') || (location.pathname).includes('CadastroQuest')) {
-
-        if (typeof (txtInstituicao) != 'undefined' && txtInstituicao != null) {
-            PreecherIntituicoes();
-        }
-
-        if (typeof (txtCurso) != 'undefined' && txtCurso != null) {
-            PreecherCursos();
-        }
-
-        if (typeof (txtMateria) != 'undefined' && txtMateria != null) {
-            PreecherMaterias();
-        }
-
-        if (typeof (txtDificuldade) != 'undefined' && txtDificuldade != null) {
-            PreecherDificuldades();
-        }
 
     }
 
@@ -218,6 +181,49 @@ function Logout() {
     localStorage.removeItem('IDProfessor');
     localStorage.clear();
     location.replace('index.html');
+}
+
+// Função utilizada nas Páginas de Login e Cadastro, verifica se já existe uma sessão
+function EntrarAutomaticamente() {
+    IDProfessor = localStorage.getItem('IDProfessor');
+
+    if (IDProfessor != null) {
+        // Redireciona para a página Principal
+        window.location.href = ('Principal.html');
+    }
+}
+
+// Verifica se o usuario está tentando acessar um página sem permissão (sem login)
+function VerificarSessao() {
+    NomeProfessor = localStorage.getItem('NomeProfessor');
+    IDProfessor = localStorage.getItem('IDProfessor');
+
+    if (IDProfessor == null) {
+        // Retorna para a página de Login
+        window.location.href = ('index.html');
+    } else {
+        // Adiciona o nome do professor na navbar
+        txtNomeProfessor.innerHTML = NomeProfessor;
+    }
+}
+
+// Alimenta os campos "select" com o banco
+function AtualizarCampos() {
+    if (typeof (txtInstituicao) != 'undefined' && txtInstituicao != null) {
+        PreecherIntituicoes();
+    }
+
+    if (typeof (txtCurso) != 'undefined' && txtCurso != null) {
+        PreecherCursos();
+    }
+
+    if (typeof (txtMateria) != 'undefined' && txtMateria != null) {
+        PreecherMaterias();
+    }
+
+    if (typeof (txtDificuldade) != 'undefined' && txtDificuldade != null) {
+        PreecherDificuldades();
+    }
 }
 // PROFESSOR --------------------------------------
 
