@@ -1,6 +1,9 @@
 // Serve para armazenar o emai do Professor quando sua conta for editada.
 var Email;
 
+var _collection;
+var _nome;
+
 $(document).ready(function () {
 
     // Impede o FORM de dar submit, e obriga ele executar o Metodo "Autenticar_Professor"
@@ -437,7 +440,6 @@ function DeletarQuestao() {
 
     }
 
-
 }
 
 // Função de deletar Questões
@@ -538,6 +540,24 @@ function ResetarTabelaQuestoes() {
     Buscar_Questoes();
 
 }
+
+// Serve para criar o clique na tabela de Questões
+function ConfigurarTabelaParaAceitarClicks() {
+    // Serve para identificar o click nas questões da tabela
+    if (typeof ($('#tabela-questoes')) != 'undefined' && $('#tabela-questoes') != null) {
+        $('#tabela-questoes').ready(function () {
+            var tbl = document.getElementById("tabela-questoes");
+            for (var i = 0; i < tbl.rows.length; i++) {
+                for (var j = 0; j < tbl.rows[i].cells.length; j++) {
+                    tbl.rows[i].cells[j].onclick = function () {
+                        txtPergunta.value = this.innerHTML;
+                        VerificarQuestao(this.innerHTML);
+                    };
+                }
+            }
+        });
+    }
+}
 // QUESTÕES --------------------------------------
 
 
@@ -561,8 +581,8 @@ function Buscar_Cursos() {
                         i++;
 
                         var $tr = $('<tr>').append(
-                            $('<td class="text-primary pergunta" id="btnPergunta">').text(item._id.$oid),
-                            $('<td>').text(item.nome)
+                            $('<td>').text(item._id.$oid),
+                            $('<td class="text-primary pergunta">').text(item.nome)
                         ).appendTo('#tabela-curso');
                     });
                 });
@@ -570,6 +590,7 @@ function Buscar_Cursos() {
             } else {
                 txtSemRegistro.innerHTML = 'SEM REGISTROS';
             }
+            ConfigurarTabelaItemParaAceitarClicks('curso');
         }
     });
 }
@@ -597,8 +618,8 @@ function Buscar_Materias() {
                         i++;
 
                         var $tr = $('<tr class="questao">').append(
-                            $('<td class="info-questao text-primary pergunta" id="btnPergunta">').text(item._id.$oid),
-                            $('<td class="info-alterCorreta">').text(item.nome)
+                            $('<td>').text(item._id.$oid),
+                            $('<td class="text-primary pergunta">').text(item.nome)
                         ).appendTo('#tabela-materia');
                     });
                 });
@@ -606,6 +627,7 @@ function Buscar_Materias() {
             } else {
                 txtSemRegistro.innerHTML = 'SEM REGISTROS';
             }
+            ConfigurarTabelaItemParaAceitarClicks('materia');
         }
     });
 }
@@ -633,8 +655,8 @@ function Buscar_Instituicoes() {
                         i++;
 
                         var $tr = $('<tr class="questao">').append(
-                            $('<td class="info-questao text-primary pergunta" id="btnPergunta">').text(item._id.$oid),
-                            $('<td class="info-alterCorreta">').text(item.nome)
+                            $('<td>').text(item._id.$oid),
+                            $('<td class="text-primary pergunta">').text(item.nome)
                         ).appendTo('#tabela-instituicao');
                     });
                 });
@@ -642,6 +664,7 @@ function Buscar_Instituicoes() {
             } else {
                 txtSemRegistro.innerHTML = 'SEM REGISTROS';
             }
+            ConfigurarTabelaItemParaAceitarClicks('instituicao');
         }
     });
 }
@@ -670,8 +693,8 @@ function Buscar_Dificuldades() {
                         i++;
 
                         var $tr = $('<tr>').append(
-                            $('<td class="info-questao text-primary" id="btnPergunta">').text(item._id.$oid),
-                            $('<td>').text(item.nome)
+                            $('<td>').text(item._id.$oid),
+                            $('<td class="text-primary pergunta">').text(item.nome)
                         ).appendTo('#tabela-dificuldade');
                     });
                 });
@@ -679,6 +702,7 @@ function Buscar_Dificuldades() {
             } else {
                 txtSemRegistro.innerHTML = 'SEM REGISTROS';
             }
+            ConfigurarTabelaItemParaAceitarClicks('dificuldade');
         }
     });
 
@@ -822,6 +846,7 @@ function AtualizarCampos() {
     }
 }
 
+// Serve para cadastrar informações em collections de forma generica
 function Cadastrar_Auxiliar() {
 
     $.ajax({
@@ -850,25 +875,119 @@ function Cadastrar_Auxiliar() {
     });
 
 }
-// CURSO, MATERIA, INSTITUICAO E DIFICULDADE --------------------------------------
 
-
-// OUTROS --------------------------------------
-// Serve para criar o clique na tabela de Questões
-function ConfigurarTabelaParaAceitarClicks() {
+// Serve para criar o clique nas tabelas de forma genérica
+function ConfigurarTabelaItemParaAceitarClicks(tabela) {
     // Serve para identificar o click nas questões da tabela
-    if (typeof ($('#tabela-questoes')) != 'undefined' && $('#tabela-questoes') != null) {
-        $('#tabela-questoes').ready(function () {
-            var tbl = document.getElementById("tabela-questoes");
+    if (typeof ($('#tabela-' + tabela)) != 'undefined' && $('#tabela-' + tabela) != null) {
+        $('#tabela-' + tabela).ready(function () {
+            var tbl = document.getElementById('tabela-' + tabela);
             for (var i = 0; i < tbl.rows.length; i++) {
                 for (var j = 0; j < tbl.rows[i].cells.length; j++) {
                     tbl.rows[i].cells[j].onclick = function () {
-                        txtPergunta.value = this.innerHTML;
-                        VerificarQuestao(this.innerHTML);
+
+                        txtNomeGenerico.value = this.innerHTML;
+
+                        if (tabela == 'curso') {
+                            _collection = 'Cursos';
+                            _nome = this.innerHTML;
+                        } else if (tabela == 'materia') {
+                            _collection = 'Materias';
+                            _nome = this.innerHTML;
+                        } else if (tabela == 'instituicao') {
+                            _collection = 'Instituicoes';
+                            _nome = this.innerHTML;
+                        } else if (tabela == 'dificuldade') {
+                            _collection = 'Dificuldades';
+                            _nome = this.innerHTML;
+                        }
+
+                        VerificarItem();
+
                     };
                 }
             }
         });
     }
 }
-// OUTROS --------------------------------------
+
+// Verifica se o item existe (faz a busca do item pelo obj Nome)
+function VerificarItem() {
+    $.ajax({
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/get_Auxiliares?_collection=' + _collection + '&nome=' + _nome,
+        data: null,
+        dataType: 'json',
+        success: function (msg) {
+
+            if (msg != null) {
+                sessionStorage.setItem('Nome', _nome);
+                txtNomeGenerico.value = _nome;
+                $('#OpcoesModal').modal('show');
+            }
+
+        }, error: function () {
+
+        }
+    });
+}
+
+function DeletarItem(collection) {
+
+    var confimacao = confirm("Tem certeza que quer excluir essa item?");
+
+    if (confimacao) {
+        $.ajax({
+            type: 'DELETE',
+            url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/delete_Auxiliar?_collection=' + collection + '&nome=' + sessionStorage.getItem('Nome'),
+            dataType: 'json',
+            success: function (msg) {
+
+                alert(msg);
+                sessionStorage.removeItem('Nome');
+                location.reload();
+
+            }, error: function (msg) {
+                alert(msg);
+                sessionStorage.removeItem('Nome');
+                location.reload();
+            },
+            contentType: "application/json"
+        });
+    } else {
+
+    }
+
+}
+
+function EditarItem(collection) {
+
+    var confimacao = confirm("Tem certeza que quer salvar as alteções?");
+
+    if (confimacao) {
+
+        $.ajax({
+            type: 'PUT',
+            url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/put_Auxiliar?_collection=' + collection + '&nome=' + sessionStorage.getItem('Nome'),
+            data: JSON.stringify({
+                "nome": txtNomeGenerico.value
+            }),
+            dataType: 'json',
+            success: function (msg) {
+
+                alert(msg);
+                sessionStorage.removeItem('Nome');
+                location.reload();
+
+            }, error: function (msg) {
+                alert(msg);
+                sessionStorage.removeItem('Nome');
+                location.reload();
+            },
+            contentType: "application/json"
+        });
+
+    } else {
+
+    }
+}
+// CURSO, MATERIA, INSTITUICAO E DIFICULDADE --------------------------------------
