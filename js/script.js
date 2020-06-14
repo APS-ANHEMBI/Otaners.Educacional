@@ -210,25 +210,6 @@ function VerificarSessao() {
     }
 }
 
-// Alimenta os campos "select" com o banco
-function AtualizarCampos() {
-    if (typeof (txtInstituicao) != 'undefined' && txtInstituicao != null) {
-        PreecherIntituicoes();
-    }
-
-    if (typeof (txtCurso) != 'undefined' && txtCurso != null) {
-        PreecherCursos();
-    }
-
-    if (typeof (txtMateria) != 'undefined' && txtMateria != null) {
-        PreecherMaterias();
-    }
-
-    if (typeof (txtDificuldade) != 'undefined' && txtDificuldade != null) {
-        PreecherDificuldades();
-    }
-}
-
 function Autenticar_Professor() {
 
     var Email = document.getElementById("email").value;
@@ -260,6 +241,17 @@ function Autenticar_Professor() {
                         if (localStorage.getItem('IDProfessor') == msg[0]._id.$oid) {
                             $('#AutenticacaoModal').modal('hide');
                             $('#PerfilModal').modal('show');
+
+                            txtNome.value = msg[0].nome;
+                            txtEmail.value = msg[0].email;
+                            txtSenha.value = msg[0].senha;
+
+                            txtDataNascimento.value = msg[0].dataNascimento;
+
+                            sessionStorage.setItem('Instituicao', msg[0].instituicao);
+                            sessionStorage.setItem('Curso', msg[0].curso);
+                            AtualizarCampos();
+
                         } else {
                             document.getElementById('txtInfo').innerHTML = 'Credenciais inválidas!';
                             document.getElementById("senha").value = '';
@@ -645,6 +637,18 @@ function PreecherIntituicoes() {
                 inner_html += '<option>' + msg[i].nome + '</option>';
             }
             txtInstituicao.innerHTML = inner_html;
+
+            if (sessionStorage.getItem('Instituicao') != null) {
+                var opts = txtInstituicao.options;
+                for (var opt, j = 0; opt = opts[j]; j++) {
+                    if (opt.value == sessionStorage.getItem('Instituicao')) {
+                        txtInstituicao.selectedIndex = j;
+                        sessionStorage.removeItem('Instituicao');
+                        break;
+                    }
+                }
+            }
+
         }
     });
 }
@@ -661,6 +665,18 @@ function PreecherCursos() {
                 inner_html += '<option>' + msg[i].nome + '</option>';
             }
             txtCurso.innerHTML = inner_html;
+
+            if (sessionStorage.getItem('Curso') != null) {
+                var opts = txtCurso.options;
+                for (var opt, j = 0; opt = opts[j]; j++) {
+                    if (opt.value == sessionStorage.getItem('Curso')) {
+                        txtCurso.selectedIndex = j;
+                        sessionStorage.removeItem('Curso');
+                        break;
+                    }
+                }
+            }
+
         }
     });
 }
@@ -722,6 +738,25 @@ function PreecherDificuldades() {
 
         }
     });
+}
+
+// Alimenta os campos "select" com o banco
+function AtualizarCampos() {
+    if (typeof (txtInstituicao) != 'undefined' && txtInstituicao != null) {
+        PreecherIntituicoes();
+    }
+
+    if (typeof (txtCurso) != 'undefined' && txtCurso != null) {
+        PreecherCursos();
+    }
+
+    if (typeof (txtMateria) != 'undefined' && txtMateria != null) {
+        PreecherMaterias();
+    }
+
+    if (typeof (txtDificuldade) != 'undefined' && txtDificuldade != null) {
+        PreecherDificuldades();
+    }
 }
 // CURSO, MATERIA, INSTITUICAO E DIFICULDADE --------------------------------------
 
