@@ -4,6 +4,22 @@ var Email;
 $(document).ready(function () {
 
     // Impede o FORM de dar submit, e obriga ele executar o Metodo "Autenticar_Professor"
+    if (typeof ($('#CadastroForm')) != 'undefined' && $('#CadastroForm') != null) {
+        $('#CadastroForm').submit(function () {
+            event.preventDefault();
+            if (location.pathname.includes('Curso')) {
+                Cadastrar_Curso();
+            } else if (location.pathname.includes('Materia')) {
+                Cadastrar_Materia();
+            } else if (location.pathname.includes('Instituicao')) {
+                Cadastrar_Instituicao();
+            } else if (location.pathname.includes('Dificuldade')) {
+                Cadastrar_Dificuldade();
+            }
+        });
+    }
+
+    // Impede o FORM de dar submit, e obriga ele executar o Metodo "Autenticar_Professor"
     if (typeof ($('#AutenticacaoForm')) != 'undefined' && $('#AutenticacaoForm') != null) {
         $('#AutenticacaoForm').submit(function () {
             event.preventDefault();
@@ -558,6 +574,10 @@ function Buscar_Cursos() {
     });
 }
 
+function Cadastrar_Curso() {
+    Cadastrar_Auxiliar('Cursos');
+}
+
 // Função de busca de Materia
 function Buscar_Materias() {
     $.ajax({
@@ -588,6 +608,10 @@ function Buscar_Materias() {
             }
         }
     });
+}
+
+function Cadastrar_Materia() {
+    Cadastrar_Auxiliar('Materias');
 }
 
 // Função de busca de Instituição
@@ -622,6 +646,10 @@ function Buscar_Instituicoes() {
     });
 }
 
+function Cadastrar_Instituicao() {
+    Cadastrar_Auxiliar('Instituicoes');
+}
+
 // Função de busca de Dificuldade
 function Buscar_Dificuldades() {
 
@@ -654,6 +682,10 @@ function Buscar_Dificuldades() {
         }
     });
 
+}
+
+function Cadastrar_Dificuldade() {
+    Cadastrar_Auxiliar('Dificuldades');
 }
 
 // Preenche os campos "select" com as Instituicoes do banco de dados
@@ -788,6 +820,35 @@ function AtualizarCampos() {
     if (typeof (txtDificuldade) != 'undefined' && txtDificuldade != null) {
         PreecherDificuldades();
     }
+}
+
+function Cadastrar_Auxiliar() {
+
+    $.ajax({
+        type: 'POST',
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/post_Auxiliares?_collection=' + arguments[0],
+        dataType: 'json',
+        data: JSON.stringify({
+            "nome": txtNome.value
+        }),
+        success: function (msg) {
+
+            if (msg) {
+                location.reload();
+            } else {
+                document.getElementById('txtInfo').innerHTML = 'Ocorreu um erro, por favor tente novamente.';
+                document.getElementById("txtNome").value = '';
+                document.getElementById("txtNome").focus();
+            }
+
+        }, error: function (msg) {
+            document.getElementById('txtInfo').innerHTML = 'Ocorreu um erro, por favor tente novamente: ' + msg;
+            document.getElementById("txtNome").value = '';
+            document.getElementById("txtNome").focus();
+        },
+        contentType: "application/json"
+    });
+
 }
 // CURSO, MATERIA, INSTITUICAO E DIFICULDADE --------------------------------------
 
