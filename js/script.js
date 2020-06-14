@@ -896,7 +896,7 @@ function VerificarItem() {
 // Serve para deletar informações em collections de forma generica
 function DeletarItem(collection) {
 
-    var confimacao = confirm("Tem certeza que quer excluir essa item?");
+    var confimacao = confirm("Tem certeza que quer excluir esse item?");
 
     if (confimacao) {
         $.ajax({
@@ -905,7 +905,6 @@ function DeletarItem(collection) {
             dataType: 'json',
             success: function (msg) {
 
-                alert(msg);
                 sessionStorage.removeItem('Nome');
                 location.reload();
 
@@ -938,7 +937,6 @@ function EditarItem(collection) {
             dataType: 'json',
             success: function (msg) {
 
-                alert(msg);
                 sessionStorage.removeItem('Nome');
                 location.reload();
 
