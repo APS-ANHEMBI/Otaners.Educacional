@@ -95,7 +95,7 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Autenticação de identidade</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Autenticação de Identidade</h5>
                     <button type="button" class="close" onclick="location.replace('Principal.html')" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -148,11 +148,6 @@
                     </div>
 
                     <div class="col-md-12">
-                        <p>Email:</p>
-                        <input type="text" class="form-control" type="email" id="txtEmail" />
-                    </div>
-
-                    <div class="col-md-12">
                         <p>Senha:</p>
                         <input type="text" class="form-control" type="text" id="txtSenha" />
                     </div>
@@ -178,7 +173,8 @@
                 </div>
                 <div class="modal-footer">
 
-                    <input type="submit" class="btn btn-outline-primary" value="Salvar Alterações" />
+                    <input type="submit" class="btn btn-outline-primary" value="Salvar Alterações"
+                        onclick="EditarProfessor();" />
                     <input type="submit" class="btn btn-outline-danger" value=" Cancelar"
                         onclick="location.replace('Principal.html')" />
 

@@ -1,3 +1,6 @@
+// Serve para armazenar o emai do Professor quando sua conta for editada.
+var Email;
+
 $(document).ready(function () {
 
     // Impede o FORM de dar submit, e obriga ele executar o Metodo "Autenticar_Professor"
@@ -212,7 +215,7 @@ function VerificarSessao() {
 
 function Autenticar_Professor() {
 
-    var Email = document.getElementById("email").value;
+    Email = document.getElementById("email").value;
     var Senha = document.getElementById("senha").value;
 
     // Requisição para efetuar Login (funciona para qualquer conta que existir)
@@ -243,7 +246,6 @@ function Autenticar_Professor() {
                             $('#PerfilModal').modal('show');
 
                             txtNome.value = msg[0].nome;
-                            txtEmail.value = msg[0].email;
                             txtSenha.value = msg[0].senha;
 
                             txtDataNascimento.value = msg[0].dataNascimento;
@@ -274,6 +276,35 @@ function Autenticar_Professor() {
             }
         }, error: function (msg) {
             document.getElementById('txtInfo').innerHTML = 'Ocorreu um erro, por favor tente novamente ...';
+        },
+        contentType: "application/json"
+    });
+}
+
+function EditarProfessor() {
+    $.ajax({
+        type: 'PUT',
+        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/put_Professor?email=' + Email,
+        data: JSON.stringify({
+            "email": Email,
+            "nome": txtNome.value,
+            "senha": txtSenha.value,
+            "curso": txtCurso.value,
+            "instituicao": txtInstituicao.value,
+            "dataNascimento": txtDataNascimento.value
+        }),
+        dataType: 'json',
+        success: function (msg) {
+
+            if (msg == 'Os Dados do Professor foram alterados com sucesso!') {
+                alert('As alterações foram concluídas com sucesso !');
+                Logout();
+            } else {
+                alert(msg);
+            }
+
+        }, error: function (msg) {
+            alert(msg);
         },
         contentType: "application/json"
     });
