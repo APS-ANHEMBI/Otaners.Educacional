@@ -5,7 +5,8 @@ $(document).ready(function () {
     IDProfessor = localStorage.getItem('IDProfessor');
 
     // Página de Login/Cadastro
-    if ((location.pathname).includes('index.html') || (location.pathname).includes('CadastroProfessor.html')) {
+    if ((location.pathname).includes('index.html') || (location.pathname).includes('CadastroProfessor.html') ||
+        location.pathname == 'https://mateusdonaire.github.io/Otaners.Educacional/') {
         if (IDProfessor != null) {
             window.location.href = ('Principal.html');
         }
