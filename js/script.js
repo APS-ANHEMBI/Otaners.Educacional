@@ -59,7 +59,11 @@ $(document).ready(function () {
     // Faz o filtro de Questões
     var campoFiltro = document.querySelector("#filtrar-tabela-materia");
     if (typeof (campoFiltro) != 'undefined' && campoFiltro != null) {
+        
         campoFiltro.addEventListener("input", function () {
+
+            document.getElementById('filtrar-tabela-dificuldade').value = '';
+
             var questoes = document.querySelectorAll(".questao");
 
             if (this.value.length > 0) {
@@ -86,6 +90,9 @@ $(document).ready(function () {
         var campoFiltro = document.querySelector("#filtrar-tabela-dificuldade");
 
         campoFiltro.addEventListener("input", function () {
+
+            document.getElementById('filtrar-tabela-materia').value = '';
+
             var questoes = document.querySelectorAll(".questao");
 
             if (this.value.length > 0) {
@@ -132,7 +139,6 @@ function Login_Professor() {
             } else {
                 document.getElementById('txtInfo').innerHTML = 'Credenciais inválidas!';
                 document.getElementById("senha").value = '';
-                document.getElementById("email").value = '';
                 document.getElementById("email").focus();
             }
         }, error: function (msg) {
