@@ -312,32 +312,42 @@ function Autenticar_Professor() {
 
 //Função de Editar as informações do Professor
 function EditarProfessor() {
-    $.ajax({
-        type: 'PUT',
-        url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/put_Professor?email=' + Email,
-        data: JSON.stringify({
-            "email": Email,
-            "nome": txtNome.value,
-            "senha": txtSenha.value,
-            "curso": txtCurso.value,
-            "instituicao": txtInstituicao.value,
-            "dataNascimento": txtDataNascimento.value
-        }),
-        dataType: 'json',
-        success: function (msg) {
-
-            if (msg == 'Os Dados do Professor foram alterados com sucesso!') {
-                alert('As alterações foram concluídas com sucesso !');
-                Logout();
-            } else {
+    if(
+    txtNome.value == null || txtNome.value == '' || 
+    txtSenha.value == null || txtSenha.value == '' || 
+    txtCurso.value == null || txtCurso.value == '' || 
+    txtInstituicao.value == null || txtInstituicao.value == '' || 
+    txtDataNascimento.value == null || txtDataNascimento.value == ''
+    ){
+        alert('Preencha todos os campos para continuar!');
+    }else{
+        $.ajax({
+            type: 'PUT',
+            url: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/otaners-educational-bxfnw/service/API/incoming_webhook/put_Professor?email=' + Email,
+            data: JSON.stringify({
+                "email": Email,
+                "nome": txtNome.value,
+                "senha": txtSenha.value,
+                "curso": txtCurso.value,
+                "instituicao": txtInstituicao.value,
+                "dataNascimento": txtDataNascimento.value
+            }),
+            dataType: 'json',
+            success: function (msg) {
+    
+                if (msg == 'Os Dados do Professor foram alterados com sucesso!') {
+                    alert('As alterações foram concluídas com sucesso !');
+                    Logout();
+                } else {
+                    alert(msg);
+                }
+    
+            }, error: function (msg) {
                 alert(msg);
-            }
-
-        }, error: function (msg) {
-            alert(msg);
-        },
-        contentType: "application/json"
-    });
+            },
+            contentType: "application/json"
+        });
+    }
 }
 // PROFESSOR --------------------------------------
 
